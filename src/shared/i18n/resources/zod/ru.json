@@ -1,0 +1,132 @@
+{
+  "Zod": {
+    "errors": {
+      "invalid_type": "Ожидался тип - {expected}, получено - {received}",
+      "invalid_type_received_undefined": "Обязательное поле",
+      "invalid_literal": "Неверное значение литерала, ожидалось {expected}",
+      "unrecognized_keys": "Неверные ключи в объекте: {keys}",
+      "invalid_union": "Результаты пересечения не могут быть объединены",
+      "invalid_union_discriminator": "Неверное значение дискриминатора. Ожидалось {options}",
+      "invalid_enum_value": "Неверное значение перечисления. Ожидалось {options}, получено '{received}'",
+      "invalid_arguments": "Неверный тип аргументов функции",
+      "invalid_return_type": "Неверный тип возвращаемого значения функции",
+      "invalid_date": "Неверный формат даты",
+      "custom": "Неверный ввод",
+      "invalid_intersection_types": "Результаты пересечения не могут быть объединены",
+      "not_multiple_of": "Число должно быть кратно {multipleOf}",
+      "not_finite": "Число должно быть конечным",
+      "invalid_string": {
+        "email": "Неверный {validation}",
+        "emoji": "Неверный {validation}",
+        "url": "Неверный {validation}",
+        "uuid": "Неверный {validation}",
+        "ulid": "Неверный {validation}",
+        "ip": "Неверный {validation}",
+        "cuid": "Неверный {validation}",
+        "cuid2": "Неверный {validation}",
+        "regex": "Неверное {validation}",
+        "date": "Неверная {validation}",
+        "nanoid": "Неверный {validation}",
+        "time": "Неверное {validation}",
+        "duration": "Неверная {validation}",
+        "base64": "Неверный {validation}",
+        "datetime": "Неверная {validation}",
+        "startsWith": "Неверный формат, должен начинаться с \"{startsWith}\"",
+        "endsWith": "Неверный формат, должен заканчиваться на \"{EndsWith}\""
+      },
+      "too_small": {
+        "array": {
+          "exact": "{path, select, missingTranslation {Array} other {{path}}} должен содержать ровно {minimum} элемента(ов)",
+          "inclusive": "{path, select, missingTranslation {Array} other {{path}}} должен содержать не менее {minimum} элемента(ов)",
+          "not_inclusive": "{path, select, missingTranslation {Array} other {{path}}} должен содержать более {minimum} элемента(ов)"
+        },
+        "string": {
+          "exact": "{path, select, missingTranslation {Array} other {{path}}} должна содержать ровно {minimum} символа(ов)",
+          "inclusive": "{path, select, missingTranslation {Array} other {{path}}} должна содержать не менее {minimum} символа(ов)",
+          "not_inclusive": "{path, select, missingTranslation {Array} other {{path}}} должна содержать более {minimum} символа(ов)"
+        },
+        "number": {
+          "exact": "{path, select, missingTranslation {Array} other {{path}}} должно быть ровно {minimum}",
+          "inclusive": "{path, select, missingTranslation {Array} other {{path}}} должно быть больше или равно {minimum}",
+          "not_inclusive": "{path, select, missingTranslation {Array} other {{path}}} должно быть больше {minimum}"
+        },
+        "set": {
+          "exact": "Неверный ввод",
+          "inclusive": "Неверный ввод",
+          "not_inclusive": "Неверный ввод"
+        },
+        "date": {
+          "exact": "Дата должна быть ровно {minimum, date, short}",
+          "inclusive": "Дата должна быть больше или равна {minimum, date, short}",
+          "not_inclusive": "Дата должна быть больше {minimum, date, short}"
+        }
+      },
+      "too_big": {
+        "array": {
+          "exact": "{path, select, missingTranslation {Array} other {{path}}} должен содержать ровно {maximum} элемента(ов)",
+          "inclusive": "{path, select, missingTranslation {Array} other {{path}}} должен содержать не более {maximum} элемента(ов)",
+          "not_inclusive": "{path, select, missingTranslation {Array} other {{path}}} должен содержать менее {maximum} элемента(ов)"
+        },
+        "string": {
+          "exact": "{path, select, missingTranslation {Array} other {{path}}} должна содержать ровно {maximum} символа(ов)",
+          "inclusive": "{path, select, missingTranslation {Array} other {{path}}} должна содержать не более {maximum} символа(ов)",
+          "not_inclusive": "{path, select, missingTranslation {Array} other {{path}}} должна содержать менее {maximum} символа(ов)"
+        },
+        "number": {
+          "exact": "{path, select, missingTranslation {Array} other {{path}}} должно быть ровно {maximum}",
+          "inclusive": "{path, select, missingTranslation {Array} other {{path}}} должно быть меньше или равно {maximum}",
+          "not_inclusive": "{path, select, missingTranslation {Array} other {{path}}} должно быть меньше {maximum}"
+        },
+        "set": {
+          "exact": "Неверный ввод",
+          "inclusive": "Неверный ввод",
+          "not_inclusive": "Неверный ввод"
+        },
+        "date": {
+          "exact": "Дата должна быть ровно {maximum, date, short}",
+          "inclusive": "Дата должна быть меньше или равна {maximum, date, short}",
+          "not_inclusive": "Дата должна быть меньше {maximum, date, short}"
+        }
+      }
+    },
+    "validations": {
+      "email": "Email",
+      "emoji": "Эмодзи",
+      "url": "URL",
+      "uuid": "UUID",
+      "ulid": "ULID",
+      "ip": "IP",
+      "cuid": "CUID",
+      "cuid2": "CUID2",
+      "regex": "регулярное выражение",
+      "date": "дата",
+      "nanoid": "nanoid",
+      "time": "время",
+      "duration": "продолжительность",
+      "base64": "base64",
+      "datetime": "дата и время"
+    },
+    "types": {
+      "function": "функция",
+      "number": "число",
+      "string": "строка",
+      "nan": "NaN",
+      "integer": "целое число",
+      "float": "число с плавающей точкой",
+      "boolean": "булево значение",
+      "date": "дата",
+      "bigint": "bigint",
+      "undefined": "undefined",
+      "symbol": "символ",
+      "null": "null",
+      "array": "массив",
+      "object": "объект",
+      "unknown": "unknown",
+      "promise": "promise",
+      "void": "void",
+      "never": "never",
+      "map": "хеш-таблица",
+      "set": "множество"
+    }
+  }
+}

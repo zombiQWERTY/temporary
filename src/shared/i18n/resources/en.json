@@ -1,0 +1,776 @@
+{
+  "enums": {
+    "politicallyExposed": {
+      "noNotLinked": "Not Linked to Politically Exposed",
+      "yesLinked": "Linked to Politically Exposed"
+    },
+    "usaResident": {
+      "no": "No",
+      "yes": "Yes"
+    },
+    "marketExperience": {
+      "moreThanFiveYears": "More Than 5 Years",
+      "twoToFiveYears": "2 to 5 Years",
+      "lessThanTwoYears": "Less Than 2 Years",
+      "noExperience": "No Experience"
+    },
+    "investedInstruments": {
+      "stocksBonds": "Stocks & Bonds",
+      "optionsFutures": "Options & Futures",
+      "allTypes": "All Types",
+      "notDecided": "Not Decided"
+    },
+    "educationLevel": {
+      "secondarySchool": "Secondary School",
+      "highSchool": "High School",
+      "professional": "Professional",
+      "academic": "Academic"
+    },
+    "investmentGoals": {
+      "capitalSaving": "Capital Saving",
+      "capitalGain": "Capital Gain",
+      "activeTrading": "Active Trading",
+      "notDecided": "Not Decided"
+    },
+    "investmentDuration": {
+      "dayTrading": "Day Trading",
+      "lessThanAYear": "Less Than a Year",
+      "moreThanAYear": "More Than a Year"
+    },
+    "tradeFrequency": {
+      "oneToFifty": "1 to 50 Trades",
+      "fiftyToOneHundred": "50 to 100 Trades",
+      "moreThanOneHundred": "More Than 100 Trades"
+    },
+    "investmentRanges": {
+      "lessThan25K": "Less Than 25K",
+      "range25K100K": "25K to 100K",
+      "range100K300K": "100K to 300K",
+      "range300K1M": "300K to 1M",
+      "range1M10M": "1M to 10M",
+      "range10M30M": "10M to 30M"
+    },
+    "sourceOfFunds": {
+      "wage": "Wage",
+      "savings": "Savings",
+      "inheritance": "Inheritance",
+      "investments": "Investments"
+    },
+    "industrySector": {
+      "construction": "Construction",
+      "financials": "Financials",
+      "casinoBettingLottery": "Casino, Betting & Lottery",
+      "largeCashTurnoverBusiness": "Large Cash Turnover Business",
+      "nonProfit": "Non-Profit",
+      "weaponsDefence": "Weapons & Defence",
+      "fundBroker": "Fund & Broker",
+      "notOneOfAbove": "Not One of the Above"
+    },
+    "positionHeld": {
+      "keyStaff": "Key Staff",
+      "middleLink": "Middle Link",
+      "student": "Student",
+      "selfEmployed": "Self-Employed",
+      "unemployed": "Unemployed"
+    },
+    "dependants": {
+      "none": "None",
+      "one": "One",
+      "twoOrMore": "Two or More"
+    },
+    "sourceOfInfo": {
+      "fromOnlineAdvertisements": "From Online Advertisements",
+      "fromSocialMedia": "From Social Media",
+      "fromOutdoorAdvertisements": "From Outdoor Advertisements",
+      "fromPersonalAdvertisementAdvisor": "From Personal Advertisement Advisor",
+      "fromSupportDepartment": "From Support Department",
+      "fromEmailNewsletters": "From Email Newsletters",
+      "fromFriends": "From Friends",
+      "iDoNotRemember": "I Do Not Remember"
+    }
+  },
+  "Common": {
+    "AccountTypes": {
+      "master": "Multi-Currency",
+      "savings": "Savings"
+    },
+    "back": "Back",
+    "continue": "Continue"
+  },
+  "Shared": {
+    "Fields": {
+      "Select": {
+        "select_option": "Select an Option"
+      },
+      "DnD": {
+        "drag_your_files_or": "Drag and Drop Your Files or",
+        "highlighted": "Select Them",
+        "formats": "Format - JPG, PNG, JPEG, PDF. Size - Up to 15 MB",
+        "Previews": {
+          "upload_success": "Success",
+          "upload_error": "Error"
+        }
+      },
+      "enter_value": "Enter Value",
+      "select_date": "Select Date"
+    },
+    "DataTable": {
+      "delete_modal_title": "Delete?",
+      "delete_modal_description": "This action cannot be undone. Continue?",
+      "delete_succeed": "Item Successfully Deleted",
+      "delete_errored": "Unexpected Error",
+      "loading_errored": "Error Loading Data",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "edit": "Edit"
+    }
+  },
+  "Features": {
+    "UploadDocument": {
+      "Requirements": {
+        "optimal": "Optimal",
+        "cropped": "Cropped",
+        "small": "Small",
+        "black_and_white": "Black & White",
+        "overexposed": "Overexposed",
+        "dark": "Dark",
+        "blurred": "Blurred",
+        "covered": "Covered",
+        "document_visibility": "The document must be visible in its entirety, and all inscriptions must be clearly visible."
+      }
+    },
+    "Accounts": {
+      "Table": {
+        "name": "Name",
+        "account_balance": "Account Balance",
+        "overall_assessment": "Overall Asset Valuation",
+        "overall_assessment_hint": "Approximate Valuation of All Assets",
+        "actions": "Actions",
+        "history": "History"
+      },
+      "ActionItems": {
+        "deposit": "Deposit",
+        "top_up_account": "Top Up Your Account in USD/EUR",
+        "between_accounts": "Transfer Between Accounts",
+        "transfer_between_accounts": "Transfer Between Your Accounts",
+        "transfer": "Transfer",
+        "to_internal_account": "To the Broker's Internal Account",
+        "exchange": "Exchange",
+        "exchange_currency": "Exchange Currency",
+        "withdraw": "Withdraw",
+        "withdraw_money": "Withdraw Money in USD/EUR"
+      }
+    },
+    "Transactions": {
+      "deposit_tm": "Investing in a Trust Management Strategy",
+      "withdrawal_tm": "Withdrawal from a Trust Management Strategy",
+      "transfer_between_accounts": "Transfer Between Accounts",
+      "refill": "Transfer Between Accounts",
+      "withdrawal": "Funds Withdrawal",
+      "currency_exchange": "Currency Exchange",
+      "debiting": "Account Debiting",
+      "service": "Service Transaction",
+      "Forms": {
+        "Common": {
+          "less_or_equal": "Must be less than or equal to the available amount",
+          "request_has_been_sent": "Your request has been sent",
+          "account_info": "{accountType} #{id}",
+          "amount": "Amount",
+          "create_request": "Create Request",
+          "select_account": "Select Account",
+          "transfer": "Transfer",
+          "withdraw": "Withdraw",
+          "select_from_account": "Select «From» Account",
+          "select_to_account": "Select «To» Account"
+        },
+        "ExternalDepositForm": {
+          "deposit_request": "Deposit Request"
+        },
+        "WithdrawalForm": {
+          "country": "Country",
+          "iban": "IBAN",
+          "bic": "BIC",
+          "bank_name": "Bank's Name",
+          "purpose_of_payment": "Purpose of Payment",
+          "recipient_name": "Recipient Name"
+        },
+        "CurrencyExchangeForm": {
+          "you_give": "You Give",
+          "you_get": "You Get (Approximately)",
+          "exchange_rate_info": "The Exchange Takes Place at the Rate of"
+        }
+      }
+    },
+    "Strategies": {
+      "invest": "Invest",
+      "Table": {
+        "name": "Strategy Name",
+        "profitability": "Profitability",
+        "investors": "Investors",
+        "amount_under_management": "Amount Under Management",
+        "age": "Age",
+        "currency": "Currency",
+        "min_amount": "Min. Amount",
+        "years": "{count} Year{count, plural, one {} other {s}}",
+        "months": "{count} Month{count, plural, one {} other {s}}"
+      },
+      "Forms": {
+        "Common": {
+          "less_or_equal": "Must be less than or equal to the available amount",
+          "select_account": "Select Account",
+          "amount": "Amount",
+          "create_request": "Create Request",
+          "request_has_been_sent": "Your request has been sent"
+        },
+        "Invest": {
+          "invest_into_strategy": "Invest Into Strategy",
+          "agreement": "I Agree with the Rules and Provisions of the Trust Management Agreement"
+        },
+        "Withdraw": {
+          "application_to_exit_strategy": "Application to Exit the Strategy",
+          "share_cost": "Share Cost",
+          "shares_estimate_cost": "Shares Estimate Cost",
+          "amount_to_be_withdrawn": "Amount to Be Withdrawn",
+          "shares_amount": "Shares Amount"
+        }
+      }
+    },
+    "Investments": {
+      "invest": "Invest",
+      "withdraw": "Withdraw",
+      "Table": {
+        "name": "Name",
+        "number_of_shares": "Number of units",
+        "cost_of_share": "Unit Price",
+        "amount_of_investment": "Amount of investment",
+        "estimated_shares_cost": "Value of units",
+        "profitability": "Return",
+        "profit": "Profit"
+      }
+    },
+    "Verification": {
+      "ResidenceAddressForm": {
+        "document_confirm_address": "Document Confirming Address",
+        "document_confirm_expire": "The date on the document should not be later than 3 months.",
+        "document_confirm_subtitle": "Upload a document confirming your address. For example: registration at the place of residence, utility bill, bank statement or any other document confirming your residential address.",
+        "Fields": {
+          "country_of_residence": "Country of Residence",
+          "postcode": "Postcode",
+          "region": "Region",
+          "city": "City",
+          "street_name": "Street name",
+          "street_no": "Street No.",
+          "flat_no": "Flat No."
+        }
+      },
+      "EconomicProfileForm": {
+        "source_of_funds": "Source of Funds",
+        "document_confirming_income": "Document Confirming Income",
+        "document_confirming_income_subtitle": "Upload a document confirming your income. For example: Bank statement, income certificate,\ncertificate of dividends, certificate of income, tax return",
+        "Form": {
+          "required_confirming_income": "Should attach document confirming income"
+        },
+        "Fields": {
+          "experience": "Experience in the Stock Market",
+          "financial_instruments": "Which financial instruments have you invested in?",
+          "your_education": "Your Education",
+          "investment_objectives": "Investment Objectives",
+          "expected_duration": "Expected duration of investments",
+          "expected_frequency": "Expected frequency of trading transactions",
+          "first_year_investment": "Initial investment for the first year",
+          "expected_turnover": "Expected turnover on the account",
+          "cumulative_assessment": "Cumulative assessment of available funds and liquid assets",
+          "annual_income": "Your annual income",
+          "employer_address_name": "Name and address of your employer",
+          "occupation": "Occupation",
+          "position": "Position",
+          "account_country": "Country, from where the account will be credited",
+          "expected_destination": "Expected destination of outgoing transfers",
+          "relatives_associated": "Are you or your relatives associated with public political figures?",
+          "number_of_dependents": "Number of Dependents"
+        }
+      },
+      "Confirm": {
+        "request_has_been_sent": "Your request has been sent",
+        "open_investment_account": "Open an investment account",
+        "accept_conditions": "To open an account remotely, you must review and accept the terms.",
+        "general_terms": "General business terms",
+        "rules": "Complaint handling rules",
+        "appendices_terms": "Appendices to the General Terms of Service",
+        "read_text": "Please carefully read the text of the application",
+        "agreed_terms": "I have read and agree with the content of the above application for joining and accept its terms.",
+        "agreed_general_rules": "I have read and agree with the General Terms of Service and the Appendices.",
+        "agreed_registration_claims": "I have read and agree with the complaint handling rules.",
+        "agreed_margin_trade": "I have read and agree with the margin trading rules.",
+        "sign_application": "Sign the application",
+        "sign_agreement_open_account": "Sign the agreement and open the account"
+      },
+      "TaxPayerForm": {
+        "submit_for_review_btn": "Submit for review",
+        "confirm_submit_to_review": "By clicking on the “Submit for review” button, I confirm that the entered data is correct and give my consent to open an account",
+        "extra_documents": "Extra documents",
+        "extra_documents_subtitle": "Download extra documents",
+        "Fields": {
+          "tax_residency": "Tax Residency",
+          "taxpayer_number": "Individual Taxpayer Number",
+          "usa_resident": "Are you a US Tax Resident?",
+          "know_about_us": "How did you know about us?"
+        }
+      }
+    }
+  },
+  "Layouts": {
+    "Auth": {
+      "Footer": {
+        "contact": "Having an Issue? Contact Us: <link>info@mind-money.eu</link>",
+        "companyWithYear": "© {year}, MIND MONEY LIMITED"
+      },
+      "RightPanel": {
+        "title": "Start Investing in Global Stock Markets",
+        "description": "Mind.Money.eu is the easiest place to invest your money and grow your wealth. Sign up today and enjoy a 14-day free trial!"
+      }
+    },
+    "Dashboard": {
+      "Footer": {
+        "companyWithYear": "© {year}, MIND MONEY LIMITED",
+        "allRightsReserved": "All Rights Reserved"
+      }
+    },
+    "Verification": {
+      "Footer": {
+        "mindMoney": "Mind-Money",
+        "contactSupport": "Contact Support",
+        "servicePlans": "Service Plans",
+        "termsOfBusiness": "Terms of Business",
+        "privacyPolicy": "Privacy Policy",
+        "dataProtectionNotice": "Data Protection Notice",
+        "documents": "Documents",
+        "description": "This website is operated by MIND MONEY LIMITED (formerly ZERICH SECURITIES LIMITED). MIND MONEY LIMITED is a Cyprus Investment Firm, authorised and regulated by the Cyprus Securities and Exchange Commission (CySEC), under the License No. 115/10. For more information about MIND MONEY LIMITED and its services, please visit: <link>https://mind-money.eu</link>"
+      }
+    }
+  },
+  "Auth": {
+    "Common": {
+      "sign_in_title": "Sign In",
+      "sign_up_title": "Sign Up",
+      "recovery_password_title": "Password Recovery",
+      "verification_code": "Verification Code"
+    },
+    "SignIn": {
+      "forgot_password": "Forgot Password?",
+      "submit_action": "Sign In"
+    },
+    "SignUp": {
+      "accept_agreement": "I accept the <terms>Terms of Use</terms> and acknowledge that I have read the <privacy>Privacy Policy</privacy>",
+      "submit_action": "Sign Up",
+      "Fields": {
+        "referral_code": "Referral Code"
+      }
+    },
+    "RecoveryPassword": {
+      "description_if_forgot": "If you have forgotten your password, enter your email and we will send a recovery code",
+      "submit_action": "Continue",
+      "sent_code": "A confirmation code has been sent to {email}. Enter it in the field below.",
+      "Fields": {
+        "email": "Your E-mail"
+      }
+    },
+    "NewPassword": {
+      "subtitle": "Enter a New Password",
+      "submit_action": "Set a New Password",
+      "Fields": {
+        "password": "Password",
+        "repeatPassword": "Repeat Password"
+      }
+    },
+    "ConfirmEmail": {
+      "subtitle": "We sent a verification code to {email}.\nPlease confirm your e-mail address."
+    },
+    "Confirm": {
+      "subtitle": "Enter a New Password",
+      "submit_action": "Set a New Password",
+      "Fields": {
+        "password": "Password",
+        "repeatPassword": "Repeat Password"
+      }
+    }
+  },
+  "Profile": {
+    "Fields": {
+      "Privacy": {
+        "email": "Email",
+        "phone": "Phone",
+        "password": "Password"
+      }
+    },
+    "Common": {
+      "profile": "Profile",
+      "personal_data": "Personal Data",
+      "passport_details": "Passport Details",
+      "address_details": "Address Details",
+      "economic_profile": "Economic Profile",
+      "taxpayer_profile": "Taxpayer Profile",
+      "documents": "Documents"
+    },
+    "Forms": {
+      "PersonalData": {
+        "request_completed_successfully": "Your request has been completed successfully",
+        "name": "Name",
+        "your_name": "Your Name",
+        "middle_name": "Middle Name",
+        "your_middle_name": "Your Middle Name",
+        "last_name": "Last Name",
+        "your_last_name": "Your Last Name",
+        "phone": "Phone",
+        "email": "Email",
+        "save": "Save"
+      },
+      "PassportData": {
+        "request_completed_successfully": "Your request has been completed successfully",
+        "birthdate": "Birthdate",
+        "document_number": "Document Number",
+        "issuing_authority": "Issuing Authority",
+        "date_of_issue_of_the_document": "Date of Issue of the Document",
+        "document_expiry_date": "Document Expiration Date",
+        "country_of_citizenship": "Country Of Citizenship",
+        "country_of_origin": "Country of Origin",
+        "place_of_birth": "Place of Birth",
+        "save": "Save"
+      },
+      "LocationData": {
+        "request_completed_successfully": "Your request has been completed successfully",
+        "country_of_residence": "Country of Residence",
+        "postcode": "Postcode",
+        "region": "Region of Residence",
+        "city": "City of Residence",
+        "street_name": "Street Name",
+        "street_number": "House Number",
+        "flat_number": "Flat Number",
+        "save": "Save"
+      },
+      "EconomicProfileData": {
+        "request_completed_successfully": "Your request has been completed successfully",
+        "experience": "Stock Market Experience",
+        "financial_instruments": "Which financial instruments have you invested in?",
+        "your_education": "Education",
+        "investment_objectives": "Investment Objectives",
+        "expected_duration": "Expected Duration of Investments",
+        "expected_frequency": "Expected Trading Frequency",
+        "first_year_investment": "Initial Investment for the First Year",
+        "expected_turnover": "Expected Account Turnover",
+        "cumulative_assessment": "Cumulative assessment of available funds and liquid assets",
+        "annual_income": "Your Annual Income",
+        "source_of_funds": "Source of Funds",
+        "employer_address_name": "Employer's Name and Address",
+        "occupation": "Field",
+        "position": "Position",
+        "account_country": "Country from which funds will be credited to the account",
+        "expected_destination": "Expected destination of outgoing transfers",
+        "relatives_associated": "Are you or your relatives associated with public political figures?",
+        "number_of_dependents": "Number of Dependents",
+        "save": "Save"
+      },
+      "TaxpayerProfileData": {
+        "request_completed_successfully": "Your request has been completed successfully",
+        "tax_residency": "Tax Residency",
+        "taxpayer_number": "Taxpayer Identification Number",
+        "usa_resident": "Are You a US Tax Resident?",
+        "know_about_us": "How Did You Hear About Us?",
+        "save": "Save"
+      },
+      "DocumentsData": {
+        "request_completed_successfully": "Your request has been completed successfully",
+        "no_documents_available": "No Documents Available",
+        "identity_confirmation_first_document": "Identity Confirmation First Document",
+        "identity_confirmation_second_document": "Identity Confirmation Second Document",
+        "address_confirmation": "Address Confirmation",
+        "income_proof": "Income Proof",
+        "tax_documents": "Tax Documents",
+        "other_documents": "Other Documents",
+        "application_form_documents": "Application Form Documents",
+        "extra_documents": "Extra Documents",
+        "save": "Save"
+      }
+    }
+  },
+  "Verification": {
+    "Common": {
+      "page_title": "User Verification",
+      "sign_contract_title": "Open an investment account",
+      "sign_contract_title_subtitle": "To complete the account opening process, you must sign the application using the email code."
+    },
+    "PassportDetails": {
+      "passport_photo": "Passport Photo",
+      "second_document": "Passport Second Page Photo",
+      "upload_any_document": "Upload any other document confirming your identity. For example: Foreign passport, driver's license, ID card, etc."
+    },
+    "Stepper": {
+      "email": "Email",
+      "passport_details": "Passport Details",
+      "passport_details_subtitle": "Attention: the details must be filled out exactly as indicated in the passport or another identity document.\n",
+      "residence_address": "Residence Address",
+      "economic_profile": "Economic Profile",
+      "taxpayer_details": "Tax Payer Profile",
+      "sign_contract": "Sign Contract",
+      "pass_later": "Pass Later",
+      "step_of": "Step {activeStep} of {totalSteps}"
+    },
+    "Fields": {
+      "name": "Name",
+      "lastName": "Last Name",
+      "birthdate": "Birthdate",
+      "document_number": "Document Number",
+      "date_of_birth": "Date of Birth",
+      "issuing_authority": "Issuing Authority",
+      "date_of_issue_of_the_document": "Date of Issue of the Document",
+      "document_expiry_date": "Document Expiration Date",
+      "country_of_citizenship": "Country of Citizenship",
+      "country_of_origin": "Country of Origin",
+      "place_of_birth": "Place of Birth"
+    }
+  },
+  "Accounts": {
+    "Common": {
+      "page_title": "Accounts"
+    }
+  },
+  "Deposit": {
+    "Common": {
+      "page_title": "Deposit"
+    },
+    "Breadcrumbs": {
+      "accounts": "Accounts",
+      "deposit": "Deposit"
+    }
+  },
+  "Withdrawal": {
+    "Common": {
+      "page_title": "Withdraw by Details"
+    },
+    "Breadcrumbs": {
+      "accounts": "Accounts",
+      "withdraw_by_details": "Withdraw by Details"
+    }
+  },
+  "DepositByDetails": {
+    "Common": {
+      "page_title": "Deposit"
+    },
+    "Breadcrumbs": {
+      "accounts": "Accounts",
+      "deposit": "Deposit",
+      "deposit_by_details": "Deposit by Details"
+    },
+    "Bank": {
+      "iban": "IBAN",
+      "swift": "SWIFT",
+      "address": "Address",
+      "bank_address": "Bank Address",
+      "beneficiary": "Beneficiary",
+      "account_number": "Account Number",
+      "payment_purpose": "Purpose of Payment",
+      "recipient_bank_name": "Beneficiary Bank Name",
+      "beneficiary_bank": "Beneficiary Bank",
+      "beneficiary_of_payment": "Beneficiary of Payment",
+      "correspondent_bank_name": "Correspondent Bank",
+      "correspondent_bank_account": "Correspondent Bank Account",
+      "correspondent_bank_swift": "Correspondent Bank SWIFT"
+    },
+    "Confirmations": {
+      "confirmation_of_brokerage_agreement": "Confirmation of Opening a Brokerage Agreement",
+      "payment_purpose_note": "Please note: the purpose of the payment must be filled out exactly as indicated in the details. The account number must be included in the payment instructions, otherwise, the money will be returned to the sender.",
+      "own_account_transfer_note": "The transfer to your trading account must be made from your own account. Transfers from another person's accounts will be returned and not credited to your brokerage account.",
+      "avoid_delays_tip": "Fill in the purpose of the payment as indicated in the details, including the account number. This will help avoid delays and possible refunds to the sender.",
+      "bank_documents_notice": "The bank may ask you for documents. When transferring money at a bank branch, we recommend downloading and printing the following documents. They may be requested to confirm the transfer.",
+      "brokerage_agreement": "Brokerage Agreement",
+      "confirmation_of_opening_brokerage_agreement": "Confirmation of Opening a Brokerage Agreement"
+    }
+  },
+  "TransferBetweenAccounts": {
+    "Common": {
+      "page_title": "Transfer Between Accounts"
+    },
+    "Breadcrumbs": {
+      "accounts": "Accounts",
+      "transfer_between_accounts": "Transfer Between Accounts"
+    }
+  },
+  "P2PTransfer": {
+    "Common": {
+      "page_title": "Person-to-Person Transfer"
+    },
+    "Breadcrumbs": {
+      "accounts": "Accounts",
+      "p2p_transfer": "Person-to-Person Transfer"
+    }
+  },
+  "Exchange": {
+    "Common": {
+      "page_title": "Currency Exchange"
+    },
+    "Breadcrumbs": {
+      "accounts": "Accounts",
+      "exchange": "Currency Exchange"
+    }
+  },
+  "Dashboard": {
+    "Common": {
+      "page_title": "Dashboard"
+    },
+    "start_investing": "Start Investing with Mind Money",
+    "start_investing_title": "Go through our guides to understand our service better and faster"
+  },
+  "TrustManagement": {
+    "Common": {
+      "page_title": "Trust Management"
+    },
+    "my_investments": "My Investments",
+    "rating_of_strategies": "Rating of Strategies",
+    "Strategy": {
+      "invest": "Invest",
+      "profitability": "Profitability",
+      "about_the_strategy": "About the Strategy",
+      "questions_and_answers": "Questions and Answers",
+      "risks": "Risks",
+      "instruments": "Instruments",
+      "rating_of_strategies": "Rating of Strategies",
+      "strategy_page": "Strategy Page",
+      "Profitability": {
+        "profitability": "Profitability",
+        "drawdown": "Drawdown",
+        "amount_under_management": "Amount Under Management",
+        "number_of_investors": "Number of Investors",
+        "age": "Age",
+        "currency": "Currency",
+        "current_share_price": "Current Share Price",
+        "maximum_drawdown": "Maximum Drawdown",
+        "sharpe_ratio": "Sharpe Ratio",
+        "profitability_max_drawdown": "Profitability/Max Drawdown",
+        "average_yield": "Average Yield",
+        "months": "{count} Month{count, plural, one {} other {s}}"
+      },
+      "About": {
+        "profitability": "Profitability",
+        "advantages_of_strategy": "Advantages of the Strategy"
+      },
+      "Instruments": {
+        "list_of_instruments": "List of Instruments"
+      },
+      "Risks": {
+        "risk_management": "Risk Management"
+      },
+      "FAQ": {}
+    }
+  },
+  "Widgets": {
+    "ConfirmPin": {
+      "confirm": "Confirm",
+      "send_code_again_after": "Send Code Again After... {seconds} sec.",
+      "send_code_again": "Send Code Again",
+      "change_email": "Change E-mail",
+      "cancel": "Cancel"
+    },
+    "ConfirmOperationPin": {
+      "send_code_again_after": "Send Code Again After... {seconds} sec.",
+      "send_code_again": "Send Code Again",
+      "change_email": "Change E-mail",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "confirm_operation": "Confirm Operation",
+      "confirmation_message": "We have sent you a confirmation code to {email}. Please confirm the transaction."
+    },
+    "MultilinePasswordValidator": {
+      "weak_password": "Weak Password",
+      "cant_contain_email": "Can’t Contain E-mail Address",
+      "contains_number_or_symbol": "Contains a Number or(and) Symbol",
+      "capitalized_letter": "One or More Capitalized Letter",
+      "at_least_characters": "At Least {count} Characters",
+      "password_strength": "Password Strength"
+    },
+    "AdvGoldForRegistrationCard": {
+      "get_gold_for_registration": "Get Gold for Registration",
+      "unlock_potential": "Unlock your full potential and enhance your skills with new features.",
+      "open_account": "Open an Account"
+    },
+    "PaymentMethodsCard": {
+      "payment_methods": "Payment Methods",
+      "bank_card": "Bank Card",
+      "bank_transfer": "Bank Transfer {currency}"
+    },
+    "ManagerCard": {
+      "request_call": "Request a Call",
+      "your_manager": "Your Personal Manager",
+      "phone": "Phone",
+      "email": "Email"
+    },
+    "GoVerificationCard": {
+      "go_through_verification": "Go Through Verification",
+      "steps_left": "{steps} Steps Left",
+      "about_minutes": "About {min} Minutes"
+    },
+    "PlayVideoCard": {
+      "watch_video": "Watch the Introduction Video",
+      "steps_left": "{steps} Steps Left",
+      "about_minutes": "About {min} Minutes",
+      "video_title": "Watch the Introduction Video About the Service",
+      "video_subtitle": "Before you start, we recommend watching this video to get familiar and trained with our service."
+    },
+    "TopAccountCard": {
+      "steps_left": "{steps} Steps Left",
+      "about_minutes": "About {min} Minutes",
+      "top_account": "Top Up Your Account"
+    },
+    "SelectProductCard": {
+      "steps_left": "{steps} Steps Left",
+      "about_minutes": "About {min} Minutes",
+      "select_product": "Select an Investment Product"
+    },
+    "PromotionsCard": {
+      "our_promotions": "Our Promotions",
+      "completed": "Completed",
+      "about_minutes": "About {min} Minutes"
+    },
+    "TelegramCard": {
+      "subscribe_telegram": "Subscribe to the Telegram Channel",
+      "steps_left": "{steps} Steps Left",
+      "about_minutes": "About {min} Minutes"
+    },
+    "DashboardSideMenu": {
+      "dashboard": "Dashboard",
+      "accounts": "Accounts",
+      "trust_management": "Trust Management"
+    },
+    "CompleteVerificationCard": {
+      "wait_for_profile_confirmation": "Wait for Profile Confirmation",
+      "complete_verification": "Complete Verification",
+      "verification_step": "Step {step} of {count}",
+      "use_service_completely": "To Use Our Service Fully"
+    },
+    "UserMenu": {
+      "profile": "Profile",
+      "logout": "Logout"
+    },
+    "TotalBalances": {
+      "balance": "Balance",
+      "make_deposit": "Make Deposit"
+    },
+    "AccountActions": {
+      "PaymentsAndTransfersCard": {
+        "title": "Payments and Transfers"
+      },
+      "AccountBlock": {
+        "loading": "Loading..."
+      }
+    },
+    "RecentTransactions": {
+      "empty_transaction": "Unfortunately, there are no transactions yet",
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "recent_transactions": "Recent Transactions",
+      "see_all": "See All"
+    },
+    "CurrencyAmountField": {
+      "available": "Available"
+    }
+  }
+}

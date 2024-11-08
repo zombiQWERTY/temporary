@@ -1,0 +1,776 @@
+{
+  "enums": {
+    "politicallyExposed": {
+      "noNotLinked": "Не связан с политически значимой персоной",
+      "yesLinked": "Связан с политически значимой персоной"
+    },
+    "usaResident": {
+      "no": "Нет",
+      "yes": "Да"
+    },
+    "marketExperience": {
+      "moreThanFiveYears": "Более 5 лет",
+      "twoToFiveYears": "От 2 до 5 лет",
+      "lessThanTwoYears": "Менее 2 лет",
+      "noExperience": "Нет опыта"
+    },
+    "investedInstruments": {
+      "stocksBonds": "Акции и облигации",
+      "optionsFutures": "Опционы и фьючерсы",
+      "allTypes": "Все типы",
+      "notDecided": "Не определился"
+    },
+    "educationLevel": {
+      "secondarySchool": "Средняя школа",
+      "highSchool": "Среднее образование",
+      "professional": "Профессиональное",
+      "academic": "Высшее образование"
+    },
+    "investmentGoals": {
+      "capitalSaving": "Сохранение капитала",
+      "capitalGain": "Приращение капитала",
+      "activeTrading": "Активная торговля",
+      "notDecided": "Не определился"
+    },
+    "investmentDuration": {
+      "dayTrading": "Дневная торговля",
+      "lessThanAYear": "Менее года",
+      "moreThanAYear": "Более года"
+    },
+    "tradeFrequency": {
+      "oneToFifty": "От 1 до 50 сделок",
+      "fiftyToOneHundred": "От 50 до 100 сделок",
+      "moreThanOneHundred": "Более 100 сделок"
+    },
+    "investmentRanges": {
+      "lessThan25K": "Менее 25K",
+      "range25K100K": "От 25K до 100K",
+      "range100K300K": "От 100K до 300K",
+      "range300K1M": "От 300K до 1M",
+      "range1M10M": "От 1M до 10M",
+      "range10M30M": "От 10M до 30M"
+    },
+    "sourceOfFunds": {
+      "wage": "Заработная плата",
+      "savings": "Сбережения",
+      "inheritance": "Наследство",
+      "investments": "Инвестиции"
+    },
+    "industrySector": {
+      "construction": "Строительство",
+      "financials": "Финансовый сектор",
+      "casinoBettingLottery": "Казино, ставки и лотереи",
+      "largeCashTurnoverBusiness": "Бизнес с большим оборотом наличных",
+      "nonProfit": "Некомерческая организация",
+      "weaponsDefence": "Оружие и оборона",
+      "fundBroker": "Фонды и брокеры",
+      "notOneOfAbove": "Не относится к указанным"
+    },
+    "positionHeld": {
+      "keyStaff": "Ключевой персонал",
+      "middleLink": "Среднее звено",
+      "student": "Студент",
+      "selfEmployed": "Самозанятый",
+      "unemployed": "Безработный"
+    },
+    "dependants": {
+      "none": "Нет",
+      "one": "Один",
+      "twoOrMore": "Двое или больше"
+    },
+    "sourceOfInfo": {
+      "fromOnlineAdvertisements": "Из онлайн-рекламы",
+      "fromSocialMedia": "Из социальных сетей",
+      "fromOutdoorAdvertisements": "Из наружной рекламы",
+      "fromPersonalAdvertisementAdvisor": "От персонального рекламного консультанта",
+      "fromSupportDepartment": "Из отдела поддержки",
+      "fromEmailNewsletters": "Из email-рассылки",
+      "fromFriends": "От друзей",
+      "iDoNotRemember": "Не помню"
+    }
+  },
+  "Common": {
+    "AccountTypes": {
+      "master": "Мультивалютный",
+      "savings": "Сберегательный"
+    },
+    "back": "Назад",
+    "continue": "Продолжить"
+  },
+  "Shared": {
+    "Fields": {
+      "Select": {
+        "select_option": "Выберите опцию"
+      },
+      "DnD": {
+        "drag_your_files_or": "Перетащите файлы или",
+        "highlighted": "Выберите их",
+        "formats": "Форматы - JPG, PNG, JPEG, PDF. Размер - до 15 MB",
+        "Previews": {
+          "upload_success": "Успешно",
+          "upload_error": "Ошибка"
+        }
+      },
+      "enter_value": "Введите значение",
+      "select_date": "Выберите дату"
+    },
+    "DataTable": {
+      "delete_modal_title": "Удалить?",
+      "delete_modal_description": "Это действие необратимо. Продолжить?",
+      "delete_succeed": "Элемент успешно удалён",
+      "delete_errored": "Неожиданная ошибка",
+      "loading_errored": "Ошибка загрузки данных",
+      "cancel": "Отмена",
+      "delete": "Удалить",
+      "edit": "Редактировать"
+    }
+  },
+  "Features": {
+    "UploadDocument": {
+      "Requirements": {
+        "optimal": "Оптимально",
+        "cropped": "Обрезано",
+        "small": "Маленькое",
+        "black_and_white": "Черно-белое",
+        "overexposed": "Переэкспонированное",
+        "dark": "Темное",
+        "blurred": "Размытое",
+        "covered": "Закрытое",
+        "document_visibility": "Документ должен быть полностью виден, все надписи должны быть четкими."
+      }
+    },
+    "Accounts": {
+      "Table": {
+        "name": "Имя",
+        "account_balance": "Баланс счета",
+        "overall_assessment": "Общая оценка активов",
+        "overall_assessment_hint": "Примерная оценка всех активов",
+        "actions": "Действия",
+        "history": "История"
+      },
+      "ActionItems": {
+        "deposit": "Пополнить",
+        "top_up_account": "Пополнить счет в USD/EUR",
+        "between_accounts": "Перевод между счетами",
+        "transfer_between_accounts": "Перевод между вашими счетами",
+        "transfer": "Перевод",
+        "to_internal_account": "На внутренний счет брокера",
+        "exchange": "Обменять",
+        "exchange_currency": "Обмен валюты",
+        "withdraw": "Снять",
+        "withdraw_money": "Снять деньги в USD/EUR"
+      }
+    },
+    "Transactions": {
+      "deposit_tm": "Инвестирование в стратегию доверительного управления",
+      "withdrawal_tm": "Вывод средств из стратегии доверительного управления",
+      "transfer_between_accounts": "Перевод между счетами",
+      "refill": "Пополнение счета",
+      "withdrawal": "Вывод средств",
+      "currency_exchange": "Обмен валюты",
+      "debiting": "Списание со счета",
+      "service": "Сервисная транзакция",
+      "Forms": {
+        "Common": {
+          "less_or_equal": "Должно быть меньше или равно доступной сумме",
+          "request_has_been_sent": "Ваш запрос отправлен",
+          "account_info": "{accountType} №{id}",
+          "amount": "Сумма",
+          "create_request": "Создать запрос",
+          "select_account": "Выбрать счет",
+          "transfer": "Перевести",
+          "withdraw": "Снять",
+          "select_from_account": "Выберите счет «С»",
+          "select_to_account": "Выберите счет «На»"
+        },
+        "ExternalDepositForm": {
+          "deposit_request": "Запрос на пополнение"
+        },
+        "WithdrawalForm": {
+          "country": "Страна",
+          "iban": "IBAN",
+          "bic": "BIC",
+          "bank_name": "Название банка",
+          "purpose_of_payment": "Назначение платежа",
+          "recipient_name": "Имя получателя"
+        },
+        "CurrencyExchangeForm": {
+          "you_give": "Вы отдаёте",
+          "you_get": "Вы получите (примерно)",
+          "exchange_rate_info": "Обмен осуществляется по курсу"
+        }
+      }
+    },
+    "Strategies": {
+      "invest": "Инвестировать",
+      "Table": {
+        "name": "Название стратегии",
+        "profitability": "Прибыльность",
+        "investors": "Инвесторы",
+        "amount_under_management": "Сумма под управлением",
+        "age": "Возраст",
+        "currency": "Валюта",
+        "min_amount": "Мин. сумма",
+        "years": "{count} Год{count, plural, one {} other {а}}",
+        "months": "{count} Месяц{count, plural, one {} other {а}}"
+      },
+      "Forms": {
+        "Common": {
+          "less_or_equal": "Должно быть меньше или равно доступной сумме",
+          "select_account": "Выберите счет",
+          "amount": "Сумма",
+          "create_request": "Создать запрос",
+          "request_has_been_sent": "Ваш запрос отправлен"
+        },
+        "Invest": {
+          "invest_into_strategy": "Инвестировать в стратегию",
+          "agreement": "Я согласен с правилами и положениями договора доверительного управления"
+        },
+        "Withdraw": {
+          "application_to_exit_strategy": "Заявка на выход из стратегии",
+          "share_cost": "Стоимость доли",
+          "shares_estimate_cost": "Оценочная стоимость долей",
+          "amount_to_be_withdrawn": "Сумма для вывода",
+          "shares_amount": "Количество долей"
+        }
+      }
+    },
+    "Investments": {
+      "invest": "Инвестировать",
+      "withdraw": "Вывести",
+      "Table": {
+        "name": "Название стратегии",
+        "number_of_shares": "Количество долей",
+        "cost_of_share": "Стоимость доли",
+        "amount_of_investment": "Сумма инвестиций",
+        "estimated_shares_cost": "Оценочная стоимость долей",
+        "profitability": "Прибыльность",
+        "profit": "Прибыль"
+      }
+    },
+    "Verification": {
+      "ResidenceAddressForm": {
+        "document_confirm_address": "Документ, подтверждающий адрес",
+        "document_confirm_expire": "Дата на документе не должна быть позднее 3х месяцев.",
+        "document_confirm_subtitle": "Загрузите документ, подтверждающий ваш адрес. Например: регистрация по месту жительства, квитанция за коммунальные услуги, выписка из банка или другой документ, подтверждающий адрес проживания.",
+        "Fields": {
+          "country_of_residence": "Страна проживания",
+          "postcode": "Почтовый индекс",
+          "region": "Регион",
+          "city": "Город",
+          "street_name": "Название улицы",
+          "street_no": "Номер дома",
+          "flat_no": "Номер квартиры"
+        }
+      },
+      "EconomicProfileForm": {
+        "source_of_funds": "Источник средств",
+        "document_confirming_income": "Документ, подтверждающий доход",
+        "document_confirming_income_subtitle": "Загрузите документ, подтверждающий ваш доход. Например: выписка из банка, справка о доходах, сертификат дивидендов, налоговая декларация",
+        "Form": {
+          "required_confirming_income": "Необходимо загрузить документ, подтверждающий доходы"
+        },
+        "Fields": {
+          "experience": "Опыт на фондовом рынке",
+          "financial_instruments": "Какими финансовыми инструментами вы инвестировали?",
+          "your_education": "Ваше образование",
+          "investment_objectives": "Инвестиционные цели",
+          "expected_duration": "Ожидаемая продолжительность инвестиций",
+          "expected_frequency": "Ожидаемая частота торговых операций",
+          "first_year_investment": "Первоначальная инвестиция на первый год",
+          "expected_turnover": "Ожидаемый оборот по счету",
+          "cumulative_assessment": "Совокупная оценка доступных средств и ликвидных активов",
+          "annual_income": "Ваш годовой доход",
+          "employer_address_name": "Имя и адрес работодателя",
+          "occupation": "Род деятельности",
+          "position": "Должность",
+          "account_country": "Страна, из которой будут зачислены средства на счет",
+          "expected_destination": "Ожидаемое направление исходящих переводов",
+          "relatives_associated": "Являетесь ли вы или ваши родственники связанными с публичными политическими фигурами?",
+          "number_of_dependents": "Количество иждивенцев"
+        }
+      },
+      "Confirm": {
+        "request_has_been_sent": "Ваш запрос отправлен",
+        "open_investment_account": "Открыть инвестиционный счет",
+        "accept_conditions": "Для открытия счета удаленно, вам необходимо ознакомиться и принять условия.",
+        "general_terms": "Общие условия ведения бизнеса",
+        "rules": "Правила обработки жалоб",
+        "appendices_terms": "Приложения к Общим условиям обслуживания",
+        "read_text": "Пожалуйста, внимательно прочтите текст заявки",
+        "agreed_terms": "Я прочитал(а) и согласен(на) с содержанием вышеуказанной заявки и принимаю её условия.",
+        "agreed_general_rules": "Я прочитал(а) и согласен(на) с Общими условиями обслуживания и Приложениями.",
+        "agreed_registration_claims": "Я прочитал(а) и согласен(на) с правилами обработки жалоб.",
+        "agreed_margin_trade": "Я прочитал(а) и согласен(на) с правилами маржинальной торговли.",
+        "sign_application": "Подписать заявку",
+        "sign_agreement_open_account": "Подписать соглашение и открыть счет"
+      },
+      "TaxPayerForm": {
+        "submit_for_review_btn": "Отправить на рассмотрение",
+        "confirm_submit_to_review": "Нажимая на кнопку «Отправить на рассмотрение», я подтверждаю правильность введенных данных и даю свое согласие на открытие счета",
+        "extra_documents": "Дополнительные документы",
+        "extra_documents_subtitle": "Загрузите дополнительные документы",
+        "Fields": {
+          "tax_residency": "Налоговое резидентство",
+          "taxpayer_number": "Идентификационный номер налогоплательщика",
+          "usa_resident": "Являетесь ли вы налоговым резидентом США?",
+          "know_about_us": "Откуда вы о нас узнали?"
+        }
+      }
+    }
+  },
+  "Layouts": {
+    "Auth": {
+      "Footer": {
+        "contact": "Возникли проблемы? Свяжитесь с нами: <link>info@mind-money.eu</link>",
+        "companyWithYear": "© {year}, MIND MONEY LIMITED"
+      },
+      "RightPanel": {
+        "title": "Начните инвестировать в мировые фондовые рынки",
+        "description": "Mind.Money.eu — это самое простое место для инвестирования и увеличения вашего капитала. Зарегистрируйтесь сегодня и получите 14-дневную бесплатную пробную версию!"
+      }
+    },
+    "Dashboard": {
+      "Footer": {
+        "companyWithYear": "© {year}, MIND MONEY LIMITED",
+        "allRightsReserved": "Все права защищены"
+      }
+    },
+    "Verification": {
+      "Footer": {
+        "mindMoney": "Mind-Money",
+        "contactSupport": "Связаться с поддержкой",
+        "servicePlans": "Тарифные планы",
+        "termsOfBusiness": "Условия ведения бизнеса",
+        "privacyPolicy": "Политика конфиденциальности",
+        "dataProtectionNotice": "Уведомление о защите данных",
+        "documents": "Документы",
+        "description": "Этот сайт управляется MIND MONEY LIMITED (ранее ZERICH SECURITIES LIMITED). MIND MONEY LIMITED является кипрской инвестиционной фирмой, лицензированной и регулируемой Кипрской комиссией по ценным бумагам и биржам (CySEC), лицензионный номер 115/10. Для получения дополнительной информации о MIND MONEY LIMITED и его услугах, посетите: <link>https://mind-money.eu</link>"
+      }
+    }
+  },
+  "Auth": {
+    "Common": {
+      "sign_in_title": "Войти",
+      "sign_up_title": "Регистрация",
+      "recovery_password_title": "Восстановление пароля",
+      "verification_code": "Код подтверждения"
+    },
+    "SignIn": {
+      "forgot_password": "Забыли пароль?",
+      "submit_action": "Войти"
+    },
+    "SignUp": {
+      "accept_agreement": "Я принимаю <terms>Условия использования</terms> и подтверждаю, что ознакомился с <privacy>Политикой конфиденциальности</privacy>",
+      "submit_action": "Зарегистрироваться",
+      "Fields": {
+        "referral_code": "Реферальный код"
+      }
+    },
+    "RecoveryPassword": {
+      "description_if_forgot": "Если вы забыли пароль, введите ваш e-mail, и мы вышлем вам код для восстановления",
+      "submit_action": "Продолжить",
+      "sent_code": "Код подтверждения был отправлен на {email}. Введите его в поле ниже.",
+      "Fields": {
+        "email": "Ваш E-mail"
+      }
+    },
+    "NewPassword": {
+      "subtitle": "Введите новый пароль",
+      "submit_action": "Установить новый пароль",
+      "Fields": {
+        "password": "Пароль",
+        "repeatPassword": "Повторите пароль"
+      }
+    },
+    "ConfirmEmail": {
+      "subtitle": "Мы отправили код подтверждения на {email}.\nПожалуйста, подтвердите свой e-mail."
+    },
+    "Confirm": {
+      "subtitle": "Введите новый пароль",
+      "submit_action": "Установить новый пароль",
+      "Fields": {
+        "password": "Пароль",
+        "repeatPassword": "Повторите пароль"
+      }
+    }
+  },
+  "Profile": {
+    "Fields": {
+      "Privacy": {
+        "email": "E-mail",
+        "phone": "Телефон",
+        "password": "Пароль"
+      }
+    },
+    "Common": {
+      "profile": "Профиль",
+      "personal_data": "Персональные данные",
+      "passport_details": "Данные паспорта",
+      "address_details": "Адресные данные",
+      "economic_profile": "Экономический профиль",
+      "taxpayer_profile": "Налоговый профиль",
+      "documents": "Документы"
+    },
+    "Forms": {
+      "PersonalData": {
+        "request_completed_successfully": "Ваш запрос был успешно выполнен",
+        "name": "Имя",
+        "your_name": "Ваше имя",
+        "middle_name": "Отчество",
+        "your_middle_name": "Ваше отчество",
+        "last_name": "Фамилия",
+        "your_last_name": "Ваша фамилия",
+        "phone": "Телефон",
+        "email": "E-mail",
+        "save": "Сохранить"
+      },
+      "PassportData": {
+        "request_completed_successfully": "Ваш запрос был успешно выполнен",
+        "birthdate": "Дата рождения",
+        "document_number": "Номер документа",
+        "issuing_authority": "Орган, выдавший документ",
+        "date_of_issue_of_the_document": "Дата выдачи документа",
+        "document_expiry_date": "Срок действия документа",
+        "country_of_citizenship": "Страна гражданства",
+        "country_of_origin": "Страна происхождения",
+        "place_of_birth": "Место рождения",
+        "save": "Сохранить"
+      },
+      "LocationData": {
+        "request_completed_successfully": "Ваш запрос был успешно выполнен",
+        "country_of_residence": "Страна проживания",
+        "postcode": "Почтовый индекс",
+        "region": "Регион проживания",
+        "city": "Город проживания",
+        "street_name": "Название улицы",
+        "street_number": "Номер дома",
+        "flat_number": "Номер квартиры",
+        "save": "Сохранить"
+      },
+      "EconomicProfileData": {
+        "request_completed_successfully": "Ваш запрос был успешно выполнен",
+        "experience": "Опыт на фондовом рынке",
+        "financial_instruments": "Какими финансовыми инструментами вы инвестировали?",
+        "your_education": "Ваше образование",
+        "investment_objectives": "Инвестиционные цели",
+        "expected_duration": "Ожидаемая продолжительность инвестиций",
+        "expected_frequency": "Ожидаемая частота торговых операций",
+        "first_year_investment": "Первоначальная инвестиция на первый год",
+        "expected_turnover": "Ожидаемый оборот по счету",
+        "cumulative_assessment": "Совокупная оценка доступных средств и ликвидных активов",
+        "annual_income": "Ваш годовой доход",
+        "source_of_funds": "Источник средств",
+        "employer_address_name": "Имя и адрес работодателя",
+        "occupation": "Род деятельности",
+        "position": "Должность",
+        "account_country": "Страна, из которой будут зачислены средства на счет",
+        "expected_destination": "Ожидаемое направление исходящих переводов",
+        "relatives_associated": "Являетесь ли вы или ваши родственники связанными с публичными политическими фигурами?",
+        "number_of_dependents": "Количество иждивенцев",
+        "save": "Сохранить"
+      },
+      "TaxpayerProfileData": {
+        "request_completed_successfully": "Ваш запрос был успешно выполнен",
+        "tax_residency": "Налоговое резидентство",
+        "taxpayer_number": "Идентификационный номер налогоплательщика",
+        "usa_resident": "Являетесь ли вы налоговым резидентом США?",
+        "know_about_us": "Откуда вы о нас узнали?",
+        "save": "Сохранить"
+      },
+      "DocumentsData": {
+        "request_completed_successfully": "Ваш запрос был успешно выполнен",
+        "no_documents_available": "Нет доступных документов",
+        "identity_confirmation_first_document": "Первый документ для подтверждения личности",
+        "identity_confirmation_second_document": "Второй документ для подтверждения личности",
+        "address_confirmation": "Подтверждение адреса",
+        "income_proof": "Подтверждение дохода",
+        "tax_documents": "Налоговые документы",
+        "other_documents": "Другие документы",
+        "application_form_documents": "Документы заявки",
+        "extra_documents": "Дополнительные документы",
+        "save": "Сохранить"
+      }
+    }
+  },
+  "Verification": {
+    "Common": {
+      "page_title": "Верификация пользователя",
+      "sign_contract_title": "Открыть инвестиционный счет",
+      "sign_contract_title_subtitle": "Для завершения процесса открытия счета вам необходимо подписать заявку, используя код, отправленный на электронную почту."
+    },
+    "PassportDetails": {
+      "passport_photo": "Фото паспорта",
+      "second_document": "Фото второй страницы паспорта",
+      "upload_any_document": "Загрузите любой другой документ, подтверждающий вашу личность. Например: заграничный паспорт, водительские права, удостоверение личности и т.д."
+    },
+    "Stepper": {
+      "email": "Электронная почта",
+      "passport_details": "Данные паспорта",
+      "passport_details_subtitle": "Внимание: данные должны быть заполнены точно так, как указано в паспорте или другом документе, удостоверяющем личность.\n",
+      "residence_address": "Адрес проживания",
+      "economic_profile": "Экономический профиль",
+      "taxpayer_details": "Налоговый профиль",
+      "sign_contract": "Подписать контракт",
+      "pass_later": "Пройти позже",
+      "step_of": "Шаг {activeStep} из {totalSteps}"
+    },
+    "Fields": {
+      "name": "Имя",
+      "lastName": "Фамилия",
+      "birthdate": "Дата рождения",
+      "document_number": "Номер документа",
+      "date_of_birth": "Дата рождения",
+      "issuing_authority": "Орган, выдавший документ",
+      "date_of_issue_of_the_document": "Дата выдачи документа",
+      "document_expiry_date": "Дата истечения срока действия документа",
+      "country_of_citizenship": "Страна гражданства",
+      "country_of_origin": "Страна происхождения",
+      "place_of_birth": "Место рождения"
+    }
+  },
+  "Accounts": {
+    "Common": {
+      "page_title": "Счета"
+    }
+  },
+  "Deposit": {
+    "Common": {
+      "page_title": "Пополнение"
+    },
+    "Breadcrumbs": {
+      "accounts": "Счета",
+      "deposit": "Пополнение"
+    }
+  },
+  "Withdrawal": {
+    "Common": {
+      "page_title": "Вывод средств по реквизитам"
+    },
+    "Breadcrumbs": {
+      "accounts": "Счета",
+      "withdraw_by_details": "Вывод по реквизитам"
+    }
+  },
+  "DepositByDetails": {
+    "Common": {
+      "page_title": "Пополнение"
+    },
+    "Breadcrumbs": {
+      "accounts": "Счета",
+      "deposit": "Пополнение",
+      "deposit_by_details": "Пополнение по реквизитам"
+    },
+    "Bank": {
+      "iban": "IBAN",
+      "swift": "SWIFT",
+      "address": "Адрес",
+      "bank_address": "Адрес банка",
+      "beneficiary": "Получатель",
+      "account_number": "Номер счета",
+      "payment_purpose": "Назначение платежа",
+      "recipient_bank_name": "Название банка получателя",
+      "beneficiary_bank": "Банк получателя",
+      "beneficiary_of_payment": "Получатель платежа",
+      "correspondent_bank_name": "Банк-корреспондент",
+      "correspondent_bank_account": "Счет банка-корреспондента",
+      "correspondent_bank_swift": "SWIFT банка-корреспондента"
+    },
+    "Confirmations": {
+      "confirmation_of_brokerage_agreement": "Подтверждение открытия брокерского соглашения",
+      "payment_purpose_note": "Обратите внимание: назначение платежа должно быть заполнено точно так, как указано в реквизитах. Номер счета должен быть включен в платежное поручение, иначе деньги будут возвращены отправителю.",
+      "own_account_transfer_note": "Перевод на ваш торговый счет должен быть сделан с вашего собственного счета. Переводы с других счетов будут возвращены и не зачислены на ваш брокерский счет.",
+      "avoid_delays_tip": "Заполните назначение платежа так, как указано в реквизитах, включая номер счета. Это поможет избежать задержек и возможного возврата средств отправителю.",
+      "bank_documents_notice": "Банк может запросить у вас документы. При переводе денег в отделении банка рекомендуем скачать и распечатать следующие документы. Их могут запросить для подтверждения перевода.",
+      "brokerage_agreement": "Брокерское соглашение",
+      "confirmation_of_opening_brokerage_agreement": "Подтверждение открытия брокерского соглашения"
+    }
+  },
+  "TransferBetweenAccounts": {
+    "Common": {
+      "page_title": "Перевод между счетами"
+    },
+    "Breadcrumbs": {
+      "accounts": "Счета",
+      "transfer_between_accounts": "Перевод между счетами"
+    }
+  },
+  "P2PTransfer": {
+    "Common": {
+      "page_title": "Перевод от человека к человеку"
+    },
+    "Breadcrumbs": {
+      "accounts": "Счета",
+      "p2p_transfer": "Перевод от человека к человеку"
+    }
+  },
+  "Exchange": {
+    "Common": {
+      "page_title": "Обмен валют"
+    },
+    "Breadcrumbs": {
+      "accounts": "Счета",
+      "exchange": "Обмен валют"
+    }
+  },
+  "Dashboard": {
+    "Common": {
+      "page_title": "Панель управления"
+    },
+    "start_investing": "Начните инвестировать с Mind Money",
+    "start_investing_title": "Пройдите наши руководства, чтобы лучше и быстрее понять наши услуги"
+  },
+  "TrustManagement": {
+    "Common": {
+      "page_title": "Доверительное управление"
+    },
+    "my_investments": "Мои инвестиции",
+    "rating_of_strategies": "Рейтинг стратегий",
+    "Strategy": {
+      "invest": "Инвестировать",
+      "profitability": "Прибыльность",
+      "about_the_strategy": "О стратегии",
+      "questions_and_answers": "Вопросы и ответы",
+      "risks": "Риски",
+      "instruments": "Инструменты",
+      "rating_of_strategies": "Рейтинг стратегий",
+      "strategy_page": "Страница стратегии",
+      "Profitability": {
+        "profitability": "Прибыльность",
+        "drawdown": "Просадка",
+        "amount_under_management": "Сумма под управлением",
+        "number_of_investors": "Количество инвесторов",
+        "age": "Возраст",
+        "currency": "Валюта",
+        "current_share_price": "Текущая стоимость доли",
+        "maximum_drawdown": "Максимальная просадка",
+        "sharpe_ratio": "Коэффициент Шарпа",
+        "profitability_max_drawdown": "Прибыльность/Максимальная просадка",
+        "average_yield": "Средняя доходность",
+        "months": "{count} Месяц{count, plural, one {} other {ев}}"
+      },
+      "About": {
+        "profitability": "Прибыльность",
+        "advantages_of_strategy": "Преимущества стратегии"
+      },
+      "Instruments": {
+        "list_of_instruments": "Список инструментов"
+      },
+      "Risks": {
+        "risk_management": "Управление рисками"
+      },
+      "FAQ": {}
+    }
+  },
+  "Widgets": {
+    "ConfirmPin": {
+      "confirm": "Подтвердить",
+      "send_code_again_after": "Отправить код повторно через... {seconds} сек.",
+      "send_code_again": "Отправить код повторно",
+      "change_email": "Изменить электронную почту",
+      "cancel": "Отмена"
+    },
+    "ConfirmOperationPin": {
+      "send_code_again_after": "Отправить код повторно через... {seconds} сек.",
+      "send_code_again": "Отправить код повторно",
+      "change_email": "Изменить электронную почту",
+      "cancel": "Отмена",
+      "confirm": "Подтвердить",
+      "confirm_operation": "Подтвердить операцию",
+      "confirmation_message": "Мы отправили вам код подтверждения на {email}. Пожалуйста, подтвердите транзакцию."
+    },
+    "MultilinePasswordValidator": {
+      "weak_password": "Слабый пароль",
+      "cant_contain_email": "Не может содержать адрес электронной почты",
+      "contains_number_or_symbol": "Содержит цифру или символ",
+      "capitalized_letter": "Одна или несколько заглавных букв",
+      "at_least_characters": "Не менее {count} символов",
+      "password_strength": "Надежность пароля"
+    },
+    "AdvGoldForRegistrationCard": {
+      "get_gold_for_registration": "Получите золото за регистрацию",
+      "unlock_potential": "Раскройте свой потенциал и улучшите свои навыки с новыми функциями.",
+      "open_account": "Открыть счет"
+    },
+    "PaymentMethodsCard": {
+      "payment_methods": "Способы оплаты",
+      "bank_card": "Банковская карта",
+      "bank_transfer": "Банковский перевод {currency}"
+    },
+    "ManagerCard": {
+      "request_call": "Запросить звонок",
+      "your_manager": "Ваш персональный менеджер",
+      "phone": "Телефон",
+      "email": "Электронная почта"
+    },
+    "GoVerificationCard": {
+      "go_through_verification": "Пройдите верификацию",
+      "steps_left": "Осталось шагов: {steps}",
+      "about_minutes": "Около {min} минут"
+    },
+    "PlayVideoCard": {
+      "watch_video": "Смотрите вступительное видео",
+      "steps_left": "Осталось шагов: {steps}",
+      "about_minutes": "Около {min} минут",
+      "video_title": "Смотрите вступительное видео о сервисе",
+      "video_subtitle": "Перед началом мы рекомендуем посмотреть это видео, чтобы ознакомиться и обучиться работе с нашим сервисом."
+    },
+    "TopAccountCard": {
+      "steps_left": "Осталось шагов: {steps}",
+      "about_minutes": "Около {min} минут",
+      "top_account": "Пополните свой счет"
+    },
+    "SelectProductCard": {
+      "steps_left": "Осталось шагов: {steps}",
+      "about_minutes": "Около {min} минут",
+      "select_product": "Выберите инвестиционный продукт"
+    },
+    "PromotionsCard": {
+      "our_promotions": "Наши акции",
+      "completed": "Завершено",
+      "about_minutes": "Около {min} минут"
+    },
+    "TelegramCard": {
+      "subscribe_telegram": "Подпишитесь на канал в Telegram",
+      "steps_left": "Осталось шагов: {steps}",
+      "about_minutes": "Около {min} минут"
+    },
+    "DashboardSideMenu": {
+      "dashboard": "Панель управления",
+      "accounts": "Счета",
+      "trust_management": "Доверительное управление"
+    },
+    "CompleteVerificationCard": {
+      "wait_for_profile_confirmation": "Ожидайте подтверждения профиля",
+      "complete_verification": "Пройдите верификацию",
+      "verification_step": "Шаг {step} из {count}",
+      "use_service_completely": "Для полного использования нашего сервиса"
+    },
+    "UserMenu": {
+      "profile": "Профиль",
+      "logout": "Выйти"
+    },
+    "TotalBalances": {
+      "balance": "Баланс",
+      "make_deposit": "Пополнить"
+    },
+    "AccountActions": {
+      "PaymentsAndTransfersCard": {
+        "title": "Платежи и переводы"
+      },
+      "AccountBlock": {
+        "loading": "Загрузка..."
+      }
+    },
+    "RecentTransactions": {
+      "empty_transaction": "К сожалению, пока нет транзакций",
+      "today": "Сегодня",
+      "yesterday": "Вчера",
+      "recent_transactions": "Последние транзакции",
+      "see_all": "Смотреть все"
+    },
+    "CurrencyAmountField": {
+      "available": "Доступно"
+    }
+  }
+}
