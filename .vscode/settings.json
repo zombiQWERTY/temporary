@@ -1,9 +1,0 @@
-{
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": false,
-  "cSpell.words": ["localforage", "Notificated"],
-  "files.associations": {
-    "*.xml": "html",
-    "*.svg": "html"
-  }
-}

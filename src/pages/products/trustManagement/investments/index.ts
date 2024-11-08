@@ -1,1 +1,0 @@
-export { Investments } from './page';
