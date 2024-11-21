@@ -1,0 +1,12 @@
+---
+- name: Pull postgres containers and run it
+  hosts: all
+  vars_files:
+    - ../vault.yml
+
+  roles:
+    - postgres_cases_service
+    - postgres_users_service
+    - postgres_tenants_service
+    - postgres_projects_service
+    - postgres_directories_service

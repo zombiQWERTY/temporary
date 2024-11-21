@@ -1,0 +1,16 @@
+{
+  "Service": {
+    "Name": "redis_auth_service",
+    "ID": "redis_auth_service-0",
+    "Tags": [ "db", "redis", "auth", "auth-service" ],
+    "Address": "redis_auth_service",
+    "Port": 6379,
+    "Check": {
+      "Name": "Redis TCP on port 6379",
+      "ID": "redis_auth_service",
+      "Interval": "10s",
+      "TCP": "redis_auth_service:6379",
+      "Timeout": "1s"
+    }
+  }
+}

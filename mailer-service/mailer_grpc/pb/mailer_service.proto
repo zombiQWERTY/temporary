@@ -1,0 +1,32 @@
+syntax = "proto3";
+package pb;
+
+service MailerService {
+    rpc Send(SendRequest) returns (SendResponse) {}
+}
+
+message SendRequest {
+    repeated Email email = 1;
+}
+
+message SendResponse {
+    bool success = 1;
+    Error error = 2;
+}
+
+message Email {
+    string to = 1;
+    string senderEmail = 2;
+    string senderIdentity = 3;
+    string Subject = 4;
+    string Html = 5;
+    string Plain = 6;
+    string Template = 7;
+    string CustomContent = 8;
+}
+
+message Error {
+    string message = 1;
+    int32 code = 2;
+    map<string, string> validation = 3;
+}

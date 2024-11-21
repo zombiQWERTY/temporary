@@ -1,0 +1,26 @@
+---
+- name: Create a network
+  docker_network:
+    name: doqa
+
+- name: Pull an Consul image
+  docker_image:
+    name: consul
+    source: pull
+
+- name: Run a Consul container
+  docker_container:
+    name: consul
+    image: consul
+    recreate: yes
+    ports:
+      - '8500:8500'
+    volumes:
+      - "~/sd-configs/prod:/consul/config"
+      - "~/containers-prod/consul:/consul/data"
+    command: "agent -server -data-dir=/consul/data -ui -bind 0.0.0.0 -client 0.0.0.0 -bootstrap-expect=1"
+    restart: yes
+    restart_policy: always
+    networks:
+      - name: "doqa"
+    networks_cli_compatible: yes

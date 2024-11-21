@@ -1,0 +1,18 @@
+---
+- name: Pull an Redis image
+  docker_image:
+    name: redis
+    source: pull
+
+- name: Run a redis_users_service container
+  docker_container:
+    name: redis_users_service
+    image: redis
+    volumes:
+      - "~/containers-prod/users-service/redis/data:/data"
+    entrypoint: "redis-server --appendonly yes --requirepass {{ redis_password }}"
+    restart: yes
+    restart_policy: always
+    networks:
+      - name: "doqa"
+    networks_cli_compatible: yes

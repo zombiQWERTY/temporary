@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS essence;
+DROP TABLE IF EXISTS directory;

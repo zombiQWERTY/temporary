@@ -1,0 +1,29 @@
+---
+- name: Log into private registry and force re-authorization
+  docker_login:
+    registry: "{{ docker_url }}"
+    username: "{{ docker_login }}"
+    password: " {{ docker_password }}"
+    reauthorize: yes
+
+- name: Pull an directories_service image
+  docker_image:
+    name: eu.gcr.io/doqa-services/doqa-directories-service:latest
+    force: yes
+    source: pull
+
+- name: Run a directories_service container
+  docker_container:
+    name: directories_service
+    image: eu.gcr.io/doqa-services/doqa-directories-service:latest
+    interactive: true
+    init: true
+    tty: true
+    recreate: yes
+    volumes:
+      - "~/containers-prod/directories-service/service/logs:/logs"
+    restart: yes
+    restart_policy: always
+    networks:
+      - name: "doqa"
+    networks_cli_compatible: yes

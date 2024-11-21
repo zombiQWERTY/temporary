@@ -1,0 +1,16 @@
+{
+  "Service": {
+    "Name": "redis_users_service",
+    "ID": "redis_users_service-0",
+    "Tags": [ "db", "redis", "users", "users-service" ],
+    "Address": "redis_users_service",
+    "Port": 6379,
+    "Check": {
+      "Name": "Redis TCP on port 6379",
+      "ID": "redis_users_service",
+      "Interval": "10s",
+      "TCP": "redis_users_service:6379",
+      "Timeout": "1s"
+    }
+  }
+}

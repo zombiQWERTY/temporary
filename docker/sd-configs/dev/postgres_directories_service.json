@@ -1,0 +1,16 @@
+{
+  "Service": {
+    "Name": "postgres_directories_service",
+    "ID": "postgres_directories_service-0",
+    "Tags": [ "db", "postgres", "directories", "directories-service" ],
+    "Address": "localhost",
+    "Port": 5436,
+    "Check": {
+      "Name": "PostgreSQL TCP on port 5436",
+      "ID": "postgres_directories_service",
+      "Interval": "10s",
+      "TCP": "postgres_directories_service:5432",
+      "Timeout": "1s"
+    }
+  }
+}

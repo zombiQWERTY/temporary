@@ -1,0 +1,16 @@
+{
+  "Service": {
+    "Name": "mongo_blacklist_service",
+    "ID": "mongo_blacklist_service-0",
+    "Tags": [ "db", "mongo", "users", "blacklist-service" ],
+    "Address": "mongo_blacklist_service",
+    "Port": 27017,
+    "Check": {
+      "Name": "MongoDB TCP on port 27017",
+      "ID": "mongo_blacklist_service",
+      "Interval": "10s",
+      "TCP": "mongo_blacklist_service:27017",
+      "Timeout": "1s"
+    }
+  }
+}

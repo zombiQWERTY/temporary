@@ -1,0 +1,16 @@
+{
+  "Service": {
+    "Name": "postgres_cases_service",
+    "ID": "postgres_cases_service-0",
+    "Tags": [ "db", "postgres", "cases", "cases-service" ],
+    "Address": "postgres_cases_service",
+    "Port": 5432,
+    "Check": {
+      "Name": "PostgreSQL TCP on port 5432",
+      "ID": "postgres_cases_service",
+      "Interval": "10s",
+      "TCP": "postgres_cases_service:5432",
+      "Timeout": "1s"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+---
+- name: Pull redis containers and run it
+  hosts: all
+  vars_files:
+    - ../vault.yml
+
+  roles:
+    - redis_users_service
+    - redis_auth_service

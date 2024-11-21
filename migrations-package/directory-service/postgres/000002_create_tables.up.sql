@@ -1,0 +1,1 @@
+CREATE INDEX idx_parent_id ON directory(parent_id);

@@ -1,0 +1,80 @@
+syntax = "proto3";
+package pb;
+
+service UsersService {
+    rpc CreateOwner(CreateOwnerRequest) returns (CreateOwnerResponse) {}
+    rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
+    rpc GetUsersByID(GetUsersByIDRequest) returns (GetUsersByIDResponse) {}
+    rpc MultiplePermissionsEdit(MultiplePermissionsEditRequest) returns (MultiplePermissionsEditResponse) {}
+    rpc CheckAccess(CheckAccessRequest) returns (CheckAccessResponse) {}
+}
+
+message CreateOwnerRequest {
+    string email = 1;
+    string firstName = 2;
+    string lastName = 3;
+    string password = 4;
+    string tenantID = 5;
+}
+
+message CreateOwnerResponse {
+    bool success = 1;
+}
+
+message GetUserRequest {
+    string tenantID = 1;
+    uint32 ID = 2;
+}
+
+message GetUserResponse {
+    uint32 ID = 1;
+    string email = 2;
+    string firstName = 3;
+    string lastName = 4;
+    string phone = 5;
+    string status = 6;
+}
+
+message GetUsersByIDRequest {
+    string tenantID = 1;
+    repeated uint32 IDs = 2;
+}
+
+message GetUsersByIDResponse {
+    repeated GetUserResponse users = 1;
+}
+
+message Permissions {
+    uint32 ID = 1;
+    repeated uint32 Models = 2;
+}
+
+message PermissionsEdit {
+    uint32 ID = 1;
+    repeated Permissions Permissions = 2;
+}
+
+message MultiplePermissionsEditRequest {
+    string tenantID = 1;
+    repeated PermissionsEdit PermissionsList = 2;
+}
+
+message MultiplePermissionsEditResponse {
+    bool success = 1;
+}
+
+message CheckAccessRequest {
+    string tenantID = 1;
+    string permName = 2;
+    uint32 userID = 3;
+    repeated uint32 modelIDs = 4;
+}
+
+message AccessByModelID {
+    bool hasAccess = 1;
+    uint32 modelID = 2;
+}
+
+message CheckAccessResponse {
+    repeated AccessByModelID access = 1;
+}

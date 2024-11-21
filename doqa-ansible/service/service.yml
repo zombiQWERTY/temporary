@@ -1,0 +1,13 @@
+---
+- name: Pull service containers and run it
+  hosts: all
+  vars_files:
+    - ../vault.yml
+
+  roles:
+    - create_directory
+    - install_pip
+    - install_pip_packages
+    - copy_configs
+    - consul
+    - adminer

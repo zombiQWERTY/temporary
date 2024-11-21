@@ -1,0 +1,29 @@
+---
+- name: Log into private registry and force re-authorization
+  docker_login:
+    registry: "{{ docker_url }}"
+    username: "{{ docker_login }}"
+    password: " {{ docker_password }}"
+    reauthorize: yes
+
+- name: Pull an landing_service image
+  docker_image:
+    name: eu.gcr.io/doqa-services/doqa-landing-service:latest
+    force: yes
+    source: pull
+
+- name: Run a landing_service container
+  docker_container:
+    name: landing_service
+    image: eu.gcr.io/doqa-services/doqa-landing-service:latest
+    interactive: true
+    init: true
+    tty: true
+    recreate: yes
+    networks:
+      - name: "doqa"
+    networks_cli_compatible: yes
+    volumes:
+      - "~/containers-prod/landing-service/service/logs:/logs"
+    restart: yes
+    restart_policy: always

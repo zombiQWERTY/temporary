@@ -1,0 +1,16 @@
+{
+  "Service": {
+    "Name": "postgres_users_service",
+    "ID": "postgres_users_service-0",
+    "Tags": [ "db", "postgres", "users", "users-service" ],
+    "Address": "localhost",
+    "Port": 5433,
+    "Check": {
+      "Name": "PostgreSQL TCP on port 5432",
+      "ID": "postgres_users_service",
+      "Interval": "10s",
+      "TCP": "postgres_users_service:5432",
+      "Timeout": "1s"
+    }
+  }
+}

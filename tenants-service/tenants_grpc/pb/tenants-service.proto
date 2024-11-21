@@ -1,0 +1,24 @@
+syntax = "proto3";
+package pb;
+
+service TenantsService {
+    rpc CreateTenant(CreateTenantRequest) returns (CreateTenantResponse) {}
+    rpc GetCompanyInfo(GetCompanyInfoRequest) returns (GetCompanyInfoResponse) {}
+}
+
+message CreateTenantRequest {
+    string name = 1;
+    string domain = 2;
+}
+
+message CreateTenantResponse {
+    bool success = 1;
+}
+
+message GetCompanyInfoRequest {
+    string tenantID = 1;
+}
+
+message GetCompanyInfoResponse {
+    string name = 1;
+}

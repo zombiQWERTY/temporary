@@ -1,0 +1,17 @@
+syntax = "proto3";
+package pb;
+
+service SignalService {
+    rpc FireEvent(FireEventRequest) returns (FireEventResponse) {}
+}
+
+message FireEventRequest {
+    repeated uint32 IDs = 1;
+    string tenantID = 2;
+    string event = 3;
+    string payload = 4;
+}
+
+message FireEventResponse {
+    bool success = 1;
+}

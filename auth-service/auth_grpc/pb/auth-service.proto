@@ -1,0 +1,46 @@
+syntax = "proto3";
+package pb;
+
+service AuthService {
+    rpc WriteToRedis(WriteToRedisRequest) returns (WriteToRedisResponse) {}
+    rpc ReadFromRedis(ReadFromRedisRequest) returns (ReadFromRedisResponse) {}
+    rpc ReadFromRedisWithEx(ReadFromRedisRequest) returns (ReadFromRedisWithExResponse) {}
+    rpc DoAuth(DoAuthRequest) returns (DoAuthResponse) {}
+}
+
+message WriteToRedisRequest {
+    string tenantID = 1;
+    string key = 2;
+    string value = 3;
+    int64  ex = 4;
+}
+
+message WriteToRedisResponse {
+    bool success = 1;
+}
+
+message ReadFromRedisRequest {
+    string tenantID = 1;
+    string key = 2;
+}
+
+message ReadFromRedisResponse {
+    bool success = 1;
+    string value = 2;
+}
+
+message ReadFromRedisWithExResponse {
+    bool success = 1;
+    int64 ex = 2;
+    string value = 3;
+}
+
+message DoAuthRequest {
+    string tenantID = 1;
+    string accessToken = 2;
+}
+
+message DoAuthResponse {
+    bool success = 1;
+    uint32 userID = 2;
+}

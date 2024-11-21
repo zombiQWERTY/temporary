@@ -1,0 +1,20 @@
+---
+- name: Pull an Adminer image
+  docker_image:
+    name: adminer
+    source: pull
+
+- name: Run a Adminer container
+  docker_container:
+    name: adminer
+    image: adminer
+    recreate: yes
+    env:
+      ADMINER_DEFAULT_SERVER: "postgres"
+    restart: yes
+    restart_policy: always
+    networks:
+      - name: "doqa"
+    networks_cli_compatible: yes
+    ports:
+      - "8080:8080"

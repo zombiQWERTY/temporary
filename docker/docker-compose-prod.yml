@@ -1,0 +1,274 @@
+version: '3.7'
+
+services:
+  consul:
+    image: consul
+    container_name: consul
+    volumes:
+      - "./sd-configs/prod:/consul/config"
+      - "./containers-prod/consul:/consul/data"
+    command: "agent -server -data-dir=/consul/data -ui -bind 0.0.0.0 -client 0.0.0.0 -bootstrap-expect=1"
+    restart: always
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    environment:
+      - ADMINER_DEFAULT_SERVER=postgres
+
+  postgres_users_service:
+    image: postgres:alpine
+    container_name: postgres_users_service
+    volumes:
+      - "./containers-prod/users-service/postgresql/data:/var/lib/postgresql/data"
+    environment:
+      - "POSTGRES_USER=${POSTGRES_USER:-doqa}"
+      - "POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-123}"
+      - "POSTGRES_DB=${POSTGRES_DB:-develop}"
+    restart: always
+
+  postgres_tenants_service:
+    image: postgres:alpine
+    container_name: postgres_tenants_service
+    volumes:
+      - "./containers-prod/tenants-service/postgresql/data:/var/lib/postgresql/data"
+    environment:
+      - "POSTGRES_USER=${POSTGRES_USER:-doqa}"
+      - "POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-123}"
+      - "POSTGRES_DB=${POSTGRES_DB:-tenants}"
+    restart: always
+
+  postgres_directories_service:
+    image: postgres:alpine
+    container_name: postgres_directories_service
+    volumes:
+      - "./containers-prod/directories-service/postgresql/data:/var/lib/postgresql/data"
+    environment:
+      - "POSTGRES_USER=${POSTGRES_USER:-doqa}"
+      - "POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-123}"
+      - "POSTGRES_DB=${POSTGRES_DB:-develop}"
+    restart: always
+
+  postgres_projects_service:
+    image: postgres:alpine
+    container_name: postgres_projects_service
+    volumes:
+      - "./containers-prod/projects-service/postgresql/data:/var/lib/postgresql/data"
+    environment:
+      - "POSTGRES_USER=${POSTGRES_USER:-doqa}"
+      - "POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-123}"
+      - "POSTGRES_DB=${POSTGRES_DB:-develop}"
+    restart: always
+
+  postgres_cases_service:
+    image: postgres:alpine
+    container_name: postgres_cases_service
+    volumes:
+      - "./containers-prod/cases-service/postgresql/data:/var/lib/postgresql/data"
+    environment:
+      - "POSTGRES_USER=${POSTGRES_USER:-doqa}"
+      - "POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-123}"
+      - "POSTGRES_DB=${POSTGRES_DB:-develop}"
+    restart: always
+
+  nginx:
+    container_name: nginx
+    image: ittestzinovev/nginx-brotli
+    stdin_open: true
+    tty: true
+    init: true
+    ports:
+      - '80:80'
+      - '443:443'
+      - '31115:31115'
+      - '31116:31116'
+    volumes:
+#      - "./nginx/passwd:/etc/nginx/passwd"
+      - "./nginx/app-prod.conf:/etc/nginx/conf.d/default.conf"
+      - "./nginx/nginx.conf:/etc/nginx/nginx.conf"
+      - "./nginx/mime.types:/etc/nginx/mime.types"
+      - "./containers-prod/nginx/logs:/var/log/nginx"
+      - "/etc/letsencrypt:/etc/letsencrypt"
+    restart: always
+
+  redis_users_service:
+    image: redis
+    container_name: redis_users_service
+    volumes:
+      - "./containers-prod/users-service/redis/data:/data"
+    entrypoint: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-123}
+    restart: always
+
+  redis_auth_service:
+    image: redis
+    container_name: redis_auth_service
+    ports:
+      - "6381:6379"
+    volumes:
+      - "./containers-prod/auth-service/redis/data:/data"
+    entrypoint: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-123}
+    restart: always
+
+  users_service:
+    container_name: users_service
+    stdin_open: true
+    tty: true
+    init: true
+    build:
+      context: ../users-service
+      dockerfile: Dockerfile
+      args:
+        - "DOCKER_GIT_CREDENTIALS=${DOCKER_GIT_CREDENTIALS}"
+        - "GOPRIVATE=${GOPRIVATE}"
+    depends_on:
+      - postgres_users_service
+      - redis_users_service
+    volumes:
+      - "./containers-prod/users-service/service/logs:/logs"
+    restart: always
+
+  projects_service:
+    container_name: projects_service
+    stdin_open: true
+    tty: true
+    init: true
+    build:
+      context: ../projects-service
+      dockerfile: Dockerfile
+      args:
+        - "DOCKER_GIT_CREDENTIALS=${DOCKER_GIT_CREDENTIALS}"
+        - "GOPRIVATE=${GOPRIVATE}"
+    depends_on:
+      - postgres_projects_service
+    volumes:
+      - "./containers-prod/projects-service/service/logs:/logs"
+    restart: always
+
+  cases_service:
+    container_name: cases_service
+    stdin_open: true
+    tty: true
+    init: true
+    build:
+      context: ../cases-service
+      dockerfile: Dockerfile
+      args:
+        - "DOCKER_GIT_CREDENTIALS=${DOCKER_GIT_CREDENTIALS}"
+        - "GOPRIVATE=${GOPRIVATE}"
+    depends_on:
+      - postgres_cases_service
+    volumes:
+      - "./containers-prod/cases-service/service/logs:/logs"
+    restart: always
+
+  directories_service:
+    container_name: directories_service
+    stdin_open: true
+    tty: true
+    init: true
+    build:
+      context: ../directory-service
+      dockerfile: Dockerfile
+      args:
+        - "DOCKER_GIT_CREDENTIALS=${DOCKER_GIT_CREDENTIALS}"
+    depends_on:
+      - postgres_directories_service
+    volumes:
+      - "./containers-prod/directories-service/service/logs:/logs"
+    restart: always
+
+  landing_service:
+    container_name: landing_service
+    stdin_open: true
+    tty: true
+    init: true
+    build:
+      context: ../landing-service
+      dockerfile: Dockerfile
+      args:
+        - "DOCKER_GIT_CREDENTIALS=${DOCKER_GIT_CREDENTIALS}"
+        - "GOPRIVATE=${GOPRIVATE}"
+    volumes:
+      - "./containers-prod/landing-service/service/logs:/logs"
+    restart: always
+
+  signal_service:
+    container_name: signal_service
+    stdin_open: true
+    tty: true
+    init: true
+    build:
+      context: ../signal-service
+      dockerfile: Dockerfile
+      args:
+        - "DOCKER_GIT_CREDENTIALS=${DOCKER_GIT_CREDENTIALS}"
+        - "GOPRIVATE=${GOPRIVATE}"
+    volumes:
+      - "./containers-prod/signal-service/service/logs:/logs"
+    restart: always
+
+  auth_service:
+    container_name: auth_service
+    stdin_open: true
+    tty: true
+    init: true
+    build:
+      context: ../auth-service
+      dockerfile: Dockerfile
+      args:
+        - "DOCKER_GIT_CREDENTIALS=${DOCKER_GIT_CREDENTIALS}"
+        - "GOPRIVATE=${GOPRIVATE}"
+    volumes:
+      - "./containers-prod/auth-service/service/logs:/logs"
+    restart: always
+
+  tenants_service:
+    container_name: tenants_service
+    stdin_open: true
+    tty: true
+    init: true
+    build:
+      context: ../tenants-service
+      dockerfile: Dockerfile
+      args:
+        - "DOCKER_GIT_CREDENTIALS=${DOCKER_GIT_CREDENTIALS}"
+        - "GOPRIVATE=${GOPRIVATE}"
+    volumes:
+      - "./containers-prod/tenants-service/service/logs:/logs"
+    restart: always
+
+  mailer_service:
+    container_name: mailer_service
+    stdin_open: true
+    tty: true
+    init: true
+    build:
+      context: ../mailer-service
+      dockerfile: Dockerfile
+      args:
+        - "DOCKER_GIT_CREDENTIALS=${DOCKER_GIT_CREDENTIALS}"
+        - "GOPRIVATE=${GOPRIVATE}"
+    volumes:
+      - "./containers-prod/mailer-service/service/logs:/logs"
+    restart: always
+
+  spa:
+    container_name: spa
+    build:
+      context: ../spa
+      dockerfile: Dockerfile
+    environment:
+      - "configuration=production"
+    volumes:
+      - "./containers-prod/nginx/spa/logs:/var/log/nginx"
+    restart: always
+
+  landing:
+    container_name: landing
+    build:
+      context: ../landing
+      dockerfile: Dockerfile
+    volumes:
+      - "./containers-prod/nginx/landing/logs:/var/log/nginx"
+    restart: always

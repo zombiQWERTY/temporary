@@ -1,0 +1,50 @@
+---
+- name: Log into private registry and force re-authorization
+  docker_login:
+    registry: "{{ docker_url }}"
+    username: "{{ docker_login }}"
+    password: " {{ docker_password }}"
+    reauthorize: yes
+
+- name: Pull an NGINX image
+  docker_image:
+    name: eu.gcr.io/doqa-services/nginx-brotli:latest
+    force: yes
+    source: pull
+
+- name: Copy nginx.conf file
+  copy:
+    src: nginx.conf
+    dest: ~/containers-prod/nginx/conf/
+
+- name: Copy mime.types file
+  copy:
+    src: mime.types
+    dest: ~/containers-prod/nginx/conf/
+
+- name: Copy app-prod.conf file
+  template: src=app-prod.conf.j2 dest=~/containers-prod/nginx/conf/app-prod.conf
+
+- name: Run a NGINX container
+  docker_container:
+    name: nginx
+    image: eu.gcr.io/doqa-services/nginx-brotli:latest
+    interactive: true
+    init: true
+    tty: true
+    ports:
+      - '80:80'
+      - '443:443'
+      - '31115:31115'
+      - '31116:31116'
+    volumes:
+      - "~/containers-prod/nginx/conf/app-prod.conf:/etc/nginx/conf.d/default.conf"
+      - "~/containers-prod/nginx/conf/mime.types:/etc/nginx/mime.types"
+      - "~/containers-prod/nginx/conf/nginx.conf:/etc/nginx/nginx.conf"
+      - "~/containers-prod/nginx/logs:/var/log/nginx"
+      - "/etc/letsencrypt:/etc/letsencrypt"
+    restart: yes
+    restart_policy: always
+    networks:
+      - name: "doqa"
+    networks_cli_compatible: yes

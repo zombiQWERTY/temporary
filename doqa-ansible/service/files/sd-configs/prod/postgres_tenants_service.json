@@ -1,0 +1,16 @@
+{
+  "Service": {
+    "Name": "postgres_tenants_service",
+    "ID": "postgres_tenants_service-0",
+    "Tags": [ "db", "postgres", "users", "tenants-service" ],
+    "Address": "postgres_tenants_service",
+    "Port": 5432,
+    "Check": {
+      "Name": "PostgreSQL TCP on port 5432",
+      "ID": "postgres_tenants_service",
+      "Interval": "10s",
+      "TCP": "postgres_tenants_service:5432",
+      "Timeout": "1s"
+    }
+  }
+}

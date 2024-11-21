@@ -1,0 +1,11 @@
+---
+- name: Pull NGINX and run it
+  hosts: all
+  vars_files:
+    - ../vault.yml
+  # remote_user: user
+  # become: yes
+  # become_method: sudo
+
+  roles:
+    - docker

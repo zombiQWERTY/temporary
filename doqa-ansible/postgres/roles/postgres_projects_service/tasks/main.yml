@@ -1,0 +1,21 @@
+---
+- name: Pull an Postgres image
+  docker_image:
+    name: postgres:alpine
+    source: pull
+
+- name: Run a postgres_projects_service container
+  docker_container:
+    name: postgres_projects_service
+    image: postgres:alpine
+    volumes:
+      - "~/containers-prod/projects-service/postgresql/data:/var/lib/postgresql/data"
+    env:
+      POSTGRES_USER: "{{ postgres_user }}"
+      POSTGRES_PASSWORD: "{{ postgres_password }}"
+      POSTGRES_DB: "{{ postgres_db }}"
+    restart: yes
+    restart_policy: always
+    networks:
+      - name: "doqa"
+    networks_cli_compatible: yes

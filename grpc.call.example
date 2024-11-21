@@ -1,0 +1,1 @@
+../grpcurl -plaintext -import-path ./protobuf-package/tenants-service/pb -proto tenants-service.proto -d '{"name": "test"}' localhost:8083 pb.TenantsService/CreateTenant

@@ -1,0 +1,20 @@
+syntax = "proto3";
+package pb;
+
+service CasesService {
+    rpc CountCases(CountCasesRequest) returns (CountCasesResponse) {}
+}
+
+message CountCasesRequest {
+    repeated uint32 space = 1;
+    string tenantID = 2;
+}
+
+message CountBySpace {
+    uint32 space = 1;
+    uint32 count = 2;
+}
+
+message CountCasesResponse {
+    repeated CountBySpace result = 1;
+}

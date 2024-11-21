@@ -1,0 +1,16 @@
+{
+  "Service": {
+    "Name": "postgres_projects_service",
+    "ID": "postgres_projects_service-0",
+    "Tags": [ "db", "postgres", "projects", "projects-service" ],
+    "Address": "localhost",
+    "Port": 5435,
+    "Check": {
+      "Name": "PostgreSQL TCP on port 5435",
+      "ID": "postgres_projects_service",
+      "Interval": "10s",
+      "TCP": "postgres_projects_service:5435",
+      "Timeout": "1s"
+    }
+  }
+}

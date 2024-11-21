@@ -1,0 +1,24 @@
+---
+- name: Log into private registry and force re-authorization
+  docker_login:
+    registry: "{{ docker_url }}"
+    username: "{{ docker_login }}"
+    password: " {{ docker_password }}"
+    reauthorize: yes
+
+- name: Pull an SPA image
+  docker_image:
+    name: eu.gcr.io/doqa-services/doqa-spa:latest
+    force: yes
+    source: pull
+
+- name: Run a SPA container
+  docker_container:
+    name: spa
+    image: eu.gcr.io/doqa-services/doqa-spa:latest
+    recreate: yes
+    volumes:
+      - "~/containers-prod/nginx/spa/logs:/var/log/nginx"
+    networks:
+      - name: "doqa"
+    networks_cli_compatible: yes
