@@ -1,0 +1,994 @@
+{
+  "endpoint": "/api/accounts/create",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/throw-error-if-not-verified",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/throw-error-if-account-blocked",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/create",
+      "method": "POST",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/my-accounts",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/throw-error-if-not-verified",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/throw-error-if-account-blocked",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/my-accounts",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/my-accounts/{id}",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/throw-error-if-not-verified",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/throw-error-if-account-blocked",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/my-accounts/{id}",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/client-accounts/{clientId}",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "accountant"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/accounts/client-accounts/{clientId}",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/balance",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/accounts/balance",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/balance/{id}",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/throw-error-if-not-verified",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/throw-error-if-account-blocked",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/balance/{id}",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/transactions/{id}",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/throw-error-if-not-verified",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/throw-error-if-account-blocked",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/transactions/{id}",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/recent-transactions/{id}",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/throw-error-if-not-verified",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/throw-error-if-account-blocked",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/recent-transactions/{id}",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/recent-transactions",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/throw-error-if-not-verified",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/throw-error-if-account-blocked",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/recent-transactions",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/client-transactions/{clientId}/{subAccountId}",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "accountant"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/accounts/client-transactions/{clientId}/{subAccountId}",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/unconfirmed-transactions",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "accountant"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/accounts/unconfirmed-transactions",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/confirm-transaction",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "accountant"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/accounts/confirm-transaction",
+      "method": "POST",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/deposit",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative",
+        "accountant"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/throw-error-if-not-verified",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/throw-error-if-account-blocked",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/deposit",
+      "method": "POST",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/withdraw",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative",
+        "accountant"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/throw-error-if-not-verified",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/throw-error-if-account-blocked",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/withdraw",
+      "method": "POST",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/internal-transfer",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative",
+        "accountant"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/throw-error-if-not-verified",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/throw-error-if-account-blocked",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/internal-transfer",
+      "method": "POST",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/p2p-transfer",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative",
+        "accountant"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/throw-error-if-not-verified",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/throw-error-if-account-blocked",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/p2p-transfer",
+      "method": "POST",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/invest-tm-transfer",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative",
+        "accountant"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/throw-error-if-not-verified",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/throw-error-if-account-blocked",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/invest-tm-transfer",
+      "method": "POST",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/withdraw-tm-transfer",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative",
+        "accountant"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/throw-error-if-not-verified",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/throw-error-if-account-blocked",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/withdraw-tm-transfer",
+      "method": "POST",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/internal-change",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative",
+        "accountant"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/throw-error-if-not-verified",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/throw-error-if-account-blocked",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/accounts/internal-change",
+      "method": "POST",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+}

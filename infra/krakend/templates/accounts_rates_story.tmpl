@@ -1,0 +1,90 @@
+{
+  "endpoint": "/api/rates",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "accountant"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/rates",
+      "method": "POST",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/rates",
+  "input_query_strings": [
+    "date",
+    "skip",
+    "take"
+  ],
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/rates",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/rates/latest",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/rates/latest",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+}
+

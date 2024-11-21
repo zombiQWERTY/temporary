@@ -1,0 +1,10 @@
+{
+  "keys": [
+    {
+      "kty": "oct",
+      "k": "$ openssl rand -base64 32 | tr '+/' '-_' | tr -d '=' ",
+      "kid": "sim2",
+      "alg": "HS256"
+    }
+  ]
+}

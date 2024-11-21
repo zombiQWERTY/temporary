@@ -1,0 +1,203 @@
+name: erp-modul
+services:
+  erp-modul.postgres:
+    container_name: erp-modul.postgres
+    env_file: .env
+    profiles: [ system ]
+    environment:
+      - POSTGRES_DB=${POSTGRES_NAME}
+      - POSTGRES_USER=${POSTGRES_USERNAME}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    command: ['postgres', '-c', 'log_statement=all']
+    image: postgres:16-alpine
+    logging:
+      options:
+        max-size: 10m
+        max-file: '3'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USERNAME} -d ${POSTGRES_NAME}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: always
+    volumes:
+      - ./.docker/postgres:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT}:5432
+
+  erp-modul.krakend:
+    container_name: erp-modul.krakend
+    # The :watch image restarts the service automatically when the configuration files change.
+    # Do not use this image in production, it's meant to speed up your testing and development.
+    image: devopsfaith/krakend:watch
+    profiles: [ system ]
+    volumes:
+      - ./infra/krakend:/etc/krakend
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - FC_ENABLE=1
+      - FC_TEMPLATES=templates
+      - FC_SETTINGS=settings/dev
+      - FC_PARTIALS=partials
+      - FC_OUT=krakend.json
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
+      - CORE_SERVICE_HOST=http://${CORE_APP_HOST}:${SERVICE_REST_PORT}
+      - ALERT_SERVICE_HOST=http://${ALERT_APP_HOST}:${SERVICE_REST_PORT}
+      - FILES_SERVICE_HOST=http://${FILES_APP_HOST}:${SERVICE_REST_PORT}
+      - ACCOUNTS_SERVICE_HOST=http://${ACCOUNTS_APP_HOST}:${SERVICE_REST_PORT}
+      - PRODUCTS_TM_SERVICE_HOST=http://${PRODUCTS_TM_APP_HOST}:${SERVICE_REST_PORT}
+    command: [ "run", "-d", "-c", "/etc/krakend/krakend.tmpl" ]
+
+  erp-modul.rabbitmq:
+    image: rabbitmq:management-alpine
+    container_name: erp-modul.rabbitmq
+    profiles: [ system ]
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBIT_MQ_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBIT_MQ_PASSWORD}
+      - RABBITMQ_LOGS=-
+      - RABBITMQ_DISK_FREE_LIMIT=2147483648
+    volumes:
+      - ./.docker/rabbitmq:/var/lib/rabbitmq
+    ports:
+      - 15672:15672
+
+  erp-modul.minio:
+    container_name: erp-modul.minio
+    image: minio/minio:RELEASE.2024-08-03T04-33-23Z
+    profiles: [ system ]
+    restart: always
+    command: [ "minio", "server", "--address", ":${MINIO_API_PORT}", "--console-address", ":9001", "/data" ]
+    volumes:
+      - ./.docker/minio/data:/data
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    healthcheck:
+      test: [ "CMD", "mc", "ready", "local" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - 9001:9001
+      - "${MINIO_API_PORT}:9000"
+
+  erp-modul.core:
+    image: erp-modul-dev:latest
+    entrypoint: /tmp/entrypoint.sh core
+    profiles: [node]
+    container_name: erp-modul.core
+    env_file:
+      - ./.env
+    restart: always
+    volumes:
+      - './logs:/usr/src/app/logs'
+      - './.env:/usr/src/app/.env'
+      - './package.json:/usr/src/app/package.json'
+      - './package-lock.json:/usr/src/app/package-lock.json'
+      - './apps:/usr/src/app/apps'
+      - './libs:/usr/src/app/libs'
+      - './resources:/usr/src/app/dist/resources'
+    stdin_open: true
+    tty: true
+
+  erp-modul.alert:
+    image: erp-modul-dev:latest
+    entrypoint: /tmp/entrypoint.sh alert
+    profiles: [node]
+    container_name: erp-modul.alert
+    env_file:
+      - ./.env
+    restart: always
+    volumes:
+      - './logs:/usr/src/app/logs'
+      - './.env:/usr/src/app/.env'
+      - './package.json:/usr/src/app/package.json'
+      - './package-lock.json:/usr/src/app/package-lock.json'
+      - './apps:/usr/src/app/apps'
+      - './libs:/usr/src/app/libs'
+      - './resources:/usr/src/app/dist/resources'
+    stdin_open: true
+    tty: true
+
+  erp-modul.audit_log:
+    image: erp-modul-dev:latest
+    entrypoint: /tmp/entrypoint.sh audit_log
+    profiles: [node]
+    container_name: erp-modul.audit_log
+    env_file:
+      - ./.env
+    restart: always
+    volumes:
+      - './logs:/usr/src/app/logs'
+      - './.env:/usr/src/app/.env'
+      - './package.json:/usr/src/app/package.json'
+      - './package-lock.json:/usr/src/app/package-lock.json'
+      - './apps:/usr/src/app/apps'
+      - './libs:/usr/src/app/libs'
+      - './resources:/usr/src/app/dist/resources'
+    stdin_open: true
+    tty: true
+
+  erp-modul.files:
+    image: erp-modul-dev:latest
+    entrypoint: /tmp/entrypoint.sh files
+    profiles: [node]
+    container_name: erp-modul.files
+    env_file:
+      - ./.env
+    restart: always
+    volumes:
+      - './logs:/usr/src/app/logs'
+      - './.env:/usr/src/app/.env'
+      - './package.json:/usr/src/app/package.json'
+      - './package-lock.json:/usr/src/app/package-lock.json'
+      - './apps:/usr/src/app/apps'
+      - './libs:/usr/src/app/libs'
+      - './resources:/usr/src/app/dist/resources'
+    stdin_open: true
+    tty: true
+
+  erp-modul.accounts:
+    image: erp-modul-dev:latest
+    entrypoint: /tmp/entrypoint.sh accounts
+    profiles: [node]
+    container_name: erp-modul.accounts
+    env_file:
+      - ./.env
+    restart: always
+    volumes:
+      - './logs:/usr/src/app/logs'
+      - './.env:/usr/src/app/.env'
+      - './package.json:/usr/src/app/package.json'
+      - './package-lock.json:/usr/src/app/package-lock.json'
+      - './apps:/usr/src/app/apps'
+      - './libs:/usr/src/app/libs'
+      - './resources:/usr/src/app/dist/resources'
+    stdin_open: true
+    tty: true
+
+  erp-modul.products_tm:
+    image: erp-modul-dev:latest
+    entrypoint: /tmp/entrypoint.sh products_tm
+    profiles: [ node ]
+    container_name: erp-modul.products_tm
+    env_file:
+      - ./.env
+    restart: always
+    volumes:
+      - './logs:/usr/src/app/logs'
+      - './.env:/usr/src/app/.env'
+      - './package.json:/usr/src/app/package.json'
+      - './package-lock.json:/usr/src/app/package-lock.json'
+      - './apps:/usr/src/app/apps'
+      - './libs:/usr/src/app/libs'
+      - './resources:/usr/src/app/dist/resources'
+    stdin_open: true
+    tty: true
+

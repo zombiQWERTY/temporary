@@ -1,0 +1,395 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "./client"
+  binaryTargets = ["native", "darwin-arm64", "linux-musl-arm64-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("CORE_POSTGRES_URL")
+}
+
+model Auth {
+  id               Int                @id @default(autoincrement())
+
+  phone            String             @db.VarChar(15) @unique
+  email            String             @db.VarChar(255) @unique
+
+  phoneConfirmed   Boolean            @default(false)
+  emailConfirmed   Boolean            @default(false)
+
+  phoneConfirmedAt DateTime?
+  emailConfirmedAt DateTime?
+
+  password         String
+  roles            RolesOnAuth[]
+
+  user             User               @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId           Int                @unique
+
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+
+  @@index([userId], name: "auth_idx_user_id")
+}
+
+model Role {
+  id               Int       @id @default(autoincrement())
+  slug             String    @unique
+  weight           Int
+  auths            RolesOnAuth[]
+}
+
+model RolesOnAuth {
+  role             Role     @relation(fields: [roleId], references: [id])
+  roleId           Int
+
+  auth             Auth     @relation(fields: [authId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  authId           Int
+
+  @@id([authId, roleId])
+
+  @@index([roleId], name: "roles_on_auth_idx_role_id")
+  @@index([authId], name: "roles_on_auth_idx_auth_id")
+}
+
+model User {
+  id               Int       @id @default(autoincrement())
+
+  firstName        String?
+  middleName       String?
+  lastName         String?
+  birthdate        DateTime?
+  workPhone        String?
+  accountStatus    AccountStatusEnum @default(Registered)
+
+  countryCode      String?
+  lang             String?
+
+  createdById      Int?
+  createdBy        User?     @relation("UserCreatedBy", fields: [createdById], references: [id])
+  createdByMe      User[]    @relation("UserCreatedBy")
+
+  managerId        Int?
+  manager          User?     @relation("UserManagedBy", fields: [managerId], references: [id])
+  iManage          User[]    @relation("UserManagedBy")
+
+  needDataVerification                   Boolean   @default(false)
+  verificationFailedReason               String?
+  verificationStage                      VerificationStageEnum @default(Passport)
+
+  verifiedById                           Int?
+  verifiedBy                             User?     @relation("UserVerifiedBy", fields: [verifiedById], references: [id])
+  iVerified                              User[]    @relation("UserVerifiedBy")
+
+  agreedToApplicationTerms               Boolean   @default(false)
+  agreedToApplicationTermsDate           DateTime?
+
+  agreedToServiceGeneralRules            Boolean   @default(false)
+  agreedToServiceGeneralRulesDate        DateTime?
+
+  agreedToClaimsRegistrationRules        Boolean   @default(false)
+  agreedToClaimsRegistrationRulesDate    DateTime?
+
+  agreedToMarginTradesRules              Boolean   @default(false)
+  agreedToMarginTradesRulesDate          DateTime?
+
+
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  auth             Auth?
+  branches         UsersOnBranch[]
+
+  sourceTracking   UserSourceTracking?
+
+  passport         Passport?
+  location         Location?
+  economicProfile  EconomicProfile?
+  taxPayerProfile  TaxPayerProfile?
+
+  documents        Document[] @relation("documents")
+
+  reviewedDocumentsByMe Document[] @relation("reviewedDocumentsByMe")
+
+  @@index([accountStatus], name: "user_idx_account_status")
+  @@index([countryCode], name: "user_idx_country_code")
+}
+
+enum AccountStatusEnum {
+  Registered
+  VerificationInProgress
+  Verified
+  Blocked
+  Inactive
+}
+
+enum VerificationStageEnum {
+  Passport
+  Residence
+  Economic
+  Taxpayer
+  Contract
+}
+
+model UserSourceTracking {
+  utmSource       String?       @db.VarChar(255)
+  utmMedium       String?       @db.VarChar(255)
+  utmCampaign     String?       @db.VarChar(255)
+  utmContent      String?       @db.VarChar(255)
+  utmTerm         String?       @db.VarChar(255)
+
+  branchId        Int?
+  managerId       Int?
+
+  countryCode     String?       @db.VarChar(255)
+  lang            String?       @db.VarChar(255)
+
+  userAgent       String?       @db.VarChar(255)
+  ipAddress       String?       @db.VarChar(255)
+
+  userId          Int           @unique
+  user            User          @relation(fields: [userId], references: [id])
+
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([userId], name: "tracking_idx_user_id")
+}
+
+model Passport {
+  id                     Int       @id @default(autoincrement())
+  documentNumber         String?   @unique // @TODO: make required
+  authority              String
+  authorityDate          DateTime
+  expiryAt               DateTime?
+  noExpirationDate       Boolean
+  citizenshipCountryCode String
+  originCountryCode      String
+  placeOfBirth           String
+
+  user                   User?      @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId                 Int?       @unique
+}
+
+model Location {
+  id                      Int       @id @default(autoincrement())
+  countryOfResidenceCode  String
+  city                    String
+  region                  String
+  street                  String
+  streetNo                String
+  flatNo                  String
+  zipCode                 String
+
+  user                    User?      @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId                  Int?       @unique
+
+  @@index([countryOfResidenceCode, city], name: "location_idx_country_city")
+}
+
+model EconomicProfile {
+  id                          Int                    @id @default(autoincrement())
+
+  marketExperience            MarketExperience
+  investedInstruments         InvestedInstruments[]
+  educationLevel              EducationLevel
+  investmentGoals             InvestmentGoals
+  investmentDuration          InvestmentDuration
+  tradeFrequency              TradeFrequency
+  initialInvestment           InvestmentRanges
+  expectedTurnover            InvestmentRanges
+  annualIncome                InvestmentRanges
+  totalAssetValue             InvestmentRanges
+  sourceOfFunds               SourceOfFunds[]
+  employerNameAddress         String
+  industrySector              IndustrySector
+  positionHeld                PositionHeld
+  fundTransferOrigin          String
+  expectedTransferDestination String
+  politicallyExposed          PoliticallyExposed
+  dependants                  Dependants
+
+  user                        User?                   @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId                      Int?                    @unique
+}
+
+enum PoliticallyExposed {
+  NoNotLinked
+  YesLinked
+}
+
+enum UsaResident {
+  No
+  Yes
+}
+
+enum MarketExperience {
+  MoreThanFiveYears
+  TwoToFiveYears
+  LessThanTwoYears
+  NoExperience
+}
+
+enum InvestedInstruments {
+  StocksBonds
+  OptionsFutures
+  AllTypes
+  NotDecided
+}
+
+enum EducationLevel {
+  SecondarySchool
+  HighSchool
+  Professional
+  Academic
+}
+
+enum InvestmentGoals {
+  CapitalSaving
+  CapitalGain
+  ActiveTrading
+  NotDecided
+}
+
+enum InvestmentDuration {
+  DayTrading
+  LessThanAYear
+  MoreThanAYear
+}
+
+enum TradeFrequency {
+  OneToFifty
+  FiftyToOneHundred
+  MoreThanOneHundred
+}
+
+enum InvestmentRanges {
+  LessThan15K
+  LessThan25K
+  Range25K100K
+  Range100K300K
+  Range300K1M
+  Range1M10M
+  Range10M30M
+}
+
+enum SourceOfFunds {
+  Wage
+  Savings
+  Inheritance
+  Investments
+}
+
+enum IndustrySector {
+  Construction
+  Financials
+  CasinoBettingLottery
+  LargeCashTurnoverBusiness
+  NonProfit
+  WeaponsDefence
+  FundBroker
+  NotOneOfAbove
+}
+
+enum PositionHeld {
+  KeyStaff
+  MiddleLink
+  Student
+  SelfEmployed
+  Unemployed
+}
+
+enum Dependants {
+  None
+  One
+  TwoOrMore
+}
+
+model TaxPayerProfile {
+  id                          Int              @id @default(autoincrement())
+
+  taxResidency                String
+  individualTaxpayerNumber    String           @unique
+  isUSTaxResident             USTaxResident
+  howDidYouHearAboutUs        SourceOfInfo
+
+  user                        User?            @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId                      Int?             @unique
+}
+
+enum USTaxResident {
+  No
+  Yes
+}
+
+enum SourceOfInfo {
+  FromOnlineAdvertisements
+  FromSocialMedia
+  FromOutdoorAdvertisements
+  FromPersonalAdvertisementAdvisor
+  FromSupportDepartment
+  FromEmailNewsletters
+  FromFriends
+  IDoNotRemember
+}
+
+model Document {
+  id               Int        @id @default(autoincrement())
+  fileId           Int
+  type             DocumentTypeEnum
+  isReviewed       Boolean    @default(false)
+  reviewedAt       DateTime?
+
+  reviewedBy       User?      @relation("reviewedDocumentsByMe", fields: [reviewedById], references: [id], onUpdate: NoAction, onDelete: NoAction)
+  reviewedById     Int?
+
+  user             User       @relation("documents", fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId           Int
+
+  @@index([userId, type], name: "document_idx_user_id_type")
+}
+
+enum DocumentTypeEnum {
+  IdentityFirstPack
+  IdentitySecondPack
+  Location
+  Economic
+  Taxes
+  Other
+  ApplicationFormForNaturalPersons
+}
+
+model Branch {
+  id               Int       @id @default(autoincrement())
+  branchName       String    @unique @db.VarChar(100)
+
+  address          String?   @db.VarChar(200)
+  phoneNumber      String?   @db.VarChar(15)
+  email            String?   @unique
+  users            UsersOnBranch[]
+
+  countries        BranchesOnCountry[]
+}
+
+model BranchesOnCountry {
+  branch           Branch    @relation(fields: [branchId], references: [id])
+  branchId         Int
+
+  countryCode      String    @db.VarChar(2)
+
+  @@id([branchId, countryCode])
+}
+
+model UsersOnBranch {
+  branch           Branch    @relation(fields: [branchId], references: [id])
+  branchId         Int
+
+  userRole         String
+  isHeadOfBranch   Boolean   @default(false)
+
+  user             User      @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId           Int
+
+  @@id([branchId, userId, userRole])
+}

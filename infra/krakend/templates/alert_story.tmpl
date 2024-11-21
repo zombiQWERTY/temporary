@@ -1,0 +1,96 @@
+{
+  "endpoint": "/api/alert/send-sms-code",
+  "method": "POST",
+  "backend": [
+    {
+      "url_pattern": "/alert/send-sms-code",
+      "method": "POST",
+      "host": [
+        "{{ env "ALERT_SERVICE_HOST" }}"
+      ],
+      "deny": {{ if eq (.env.name) "PROD" }}["code"]{{else}}[]{{ end }},
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "alert_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/alert/send-email-code",
+  "method": "POST",
+  "backend": [
+    {
+      "url_pattern": "/alert/send-email-code",
+      "method": "POST",
+      "host": [
+        "{{ env "ALERT_SERVICE_HOST" }}"
+      ],
+      "deny": {{ if eq (.env.name) "PROD" }}["code"]{{else}}[]{{ end }},
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "alert_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/alert/send-sms-code-logged",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/alert/send-sms-code",
+      "method": "POST",
+      "host": [
+        "{{ env "ALERT_SERVICE_HOST" }}"
+      ],
+      "deny": {{ if eq (.env.name) "PROD" }}["code"]{{else}}[]{{ end }},
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "alert_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/alert/send-email-code-logged",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/alert/send-email-code",
+      "method": "POST",
+      "host": [
+        "{{ env "ALERT_SERVICE_HOST" }}"
+      ],
+      "deny": {{ if eq (.env.name) "PROD" }}["code"]{{else}}[]{{ end }},
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "alert_service"
+        }
+      }
+    }
+  ]
+}
+
+

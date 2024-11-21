@@ -1,0 +1,288 @@
+{
+  "@comment": "Create trust management strategy",
+  "endpoint": "/api/products-tm",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "trustee"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/products-tm",
+      "method": "POST",
+      "host": [
+        "{{ env "PRODUCTS_TM_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "products_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "@comment": "Update trust management strategy",
+  "endpoint": "/api/products-tm/{id}",
+  "method": "PATCH",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "trustee"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/products-tm/{id}",
+      "method": "PATCH",
+      "host": [
+        "{{ env "PRODUCTS_TM_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "products_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "@comment": "Get one trust management strategy",
+  "endpoint": "/api/products-tm/{id}",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "trustee",
+        "client",
+        "clientRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/products-tm/{id}",
+      "method": "GET",
+      "host": [
+        "{{ env "PRODUCTS_TM_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "products_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "@comment": "Get list of trust management strategies - Рейтинг стратегий в фигме",
+  "endpoint": "/api/products-tm",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "trustee",
+        "client",
+        "clientRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/products-tm",
+      "method": "GET",
+      "host": [
+        "{{ env "PRODUCTS_TM_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "products_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "@comment": "Get list of my investments - Мои инвестиции в фигме",
+  "endpoint": "/api/products-tm/my-investments",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/products-tm/my-investments",
+      "method": "GET",
+      "host": [
+        "{{ env "PRODUCTS_TM_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "products_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "@comment": "Create share for strategy",
+  "endpoint": "/api/products-tm/shares/{id}",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "trustee"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/products-tm/shares/{id}",
+      "method": "POST",
+      "host": [
+        "{{ env "PRODUCTS_TM_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "products_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "@comment": "Update share",
+  "endpoint": "/api/products-tm/shares/{id}/{shareId}",
+  "method": "PATCH",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "trustee"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/products-tm/shares/{id}/{shareId}",
+      "method": "PATCH",
+      "host": [
+        "{{ env "PRODUCTS_TM_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "products_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "@comment": "Get one share",
+  "endpoint": "/api/products-tm/shares/{id}",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "trustee",
+        "client",
+        "clientRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/products-tm/shares/{id}",
+      "method": "GET",
+      "host": [
+        "{{ env "PRODUCTS_TM_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "products_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "@comment": "Get list of shares",
+  "endpoint": "/api/products-tm/shares",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "trustee",
+        "client",
+        "clientRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/products-tm/shares",
+      "method": "GET",
+      "host": [
+        "{{ env "PRODUCTS_TM_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "products_service"
+        }
+      }
+    }
+  ]
+}

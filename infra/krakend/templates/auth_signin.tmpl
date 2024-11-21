@@ -1,0 +1,139 @@
+{
+  "endpoint": "/api/auth/signin/client",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "@comment": "We have same route for phone login, but currently we use email",
+      "url_pattern": "/auth/signin/email?target=client",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/users/internal-profile/{resp0_userId}",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "deny": ["authId"],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/auth/signin/admin",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "@comment": "We have same route for phone login, but currently we use email",
+      "url_pattern": "/auth/signin/email?target=admin",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/users/internal-profile/{resp0_userId}",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "deny": ["authId"],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/auth/signin/proxy-login",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/signer": {{ include "auth_signer.tmpl" }},
+    "auth/validator": {
+      "roles": [
+          "admin"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/auth/signin/proxy",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/auth/signin/renew-auth",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      {{ include "auth_validator.tmpl" }},
+      "audience": ["refresh"]
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/auth/signin/renew-auth",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+}

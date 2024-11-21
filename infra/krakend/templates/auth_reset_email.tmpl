@@ -1,0 +1,56 @@
+{
+  "@comment": "Use for reset email from authorized person",
+  "endpoint": "/api/auth/reset-email",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/auth/reset-email",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "deny": {{ if eq (.env.name) "PROD" }}["code"]{{else}}[]{{ end }},
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "@comment": "Use for reset email from authorized person",
+  "endpoint": "/api/auth/reset-email/confirm",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/auth/reset-email/confirm",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "deny": {{ if eq (.env.name) "PROD" }}["code"]{{else}}[]{{ end }},
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+}

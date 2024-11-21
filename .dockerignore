@@ -1,0 +1,5 @@
+**/.docker
+**/prisma/client
+**/.git
+**/.idea
+**/node_modules

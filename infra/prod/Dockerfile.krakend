@@ -1,0 +1,32 @@
+FROM devopsfaith/krakend:2.6 AS builder
+
+WORKDIR /etc/krakend
+
+ARG ENV=prod
+
+ARG CORS_ALLOWED_ORIGINS
+ARG CORE_SERVICE_HOST
+ARG ALERT_SERVICE_HOST
+ARG FILES_SERVICE_HOST
+ARG ACCOUNTS_SERVICE_HOST
+ARG PRODUCTS_TM_SERVICE_HOST
+
+COPY ./infra/krakend/ .
+
+## Save temporary file to /tmp to avoid permission errors
+RUN FC_ENABLE=1 \
+    FC_OUT=/tmp/krakend.json \
+    FC_PARTIALS="/etc/krakend/partials" \
+    FC_SETTINGS="/etc/krakend/settings/$ENV" \
+    FC_TEMPLATES="/etc/krakend/templates" \
+    krakend check -d -t -c /etc/krakend/krakend.tmpl --lint
+
+FROM devopsfaith/krakend:2.6
+
+WORKDIR /etc/krakend
+
+# Keep operating system updated with security fixes between releases
+RUN apk upgrade --no-cache --no-interactive
+
+COPY --from=builder --chown=krakend:nogroup /etc/krakend/symmetric_jwk.json .
+COPY --from=builder --chown=krakend:nogroup /tmp/krakend.json .

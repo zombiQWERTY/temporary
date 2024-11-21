@@ -1,0 +1,27 @@
+{
+  "endpoint": "/api/files/upload",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/upload",
+      "method": "POST",
+      "host": [
+        "{{ env "FILES_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "files_service"
+        }
+      }
+    }
+  ]
+}

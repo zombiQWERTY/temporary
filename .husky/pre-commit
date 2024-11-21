@@ -1,0 +1,8 @@
+npm run lint-staged
+
+for APP_PATH in ./apps/*/ ; do
+  APP=$(basename "$APP_PATH")
+  if [ -f "$APP_PATH/prisma/schema.prisma" ]; then
+    npx prisma validate --schema=$APP_PATH/prisma/schema.prisma
+  fi
+done

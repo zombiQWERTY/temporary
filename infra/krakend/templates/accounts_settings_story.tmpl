@@ -1,0 +1,92 @@
+{
+  "endpoint": "/api/accounts/settings/{userId}",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "complianceManager"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/accounts/settings/{userId}",
+      "method": "POST",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/settings/{userId}",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "complianceManager"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/accounts/settings/{userId}",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/accounts/settings",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/accounts/settings",
+      "method": "GET",
+      "host": [
+        "{{ env "ACCOUNTS_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "accounts_service"
+        }
+      }
+    }
+  ]
+}
+

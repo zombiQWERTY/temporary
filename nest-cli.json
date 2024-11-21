@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "monorepo": true,
+  "root": "apps/core",
+  "sourceRoot": "apps/core/src",
+  "compilerOptions": {
+    "webpack": true,
+    "deleteOutDir": true,
+    "assets": [
+      "resources/**/*"
+    ],
+    "tsConfigPath": "apps/core/tsconfig.app.json"
+  },
+  "projects": {
+    "core": {
+      "type": "application",
+      "root": "apps/core",
+      "entryFile": "main",
+      "sourceRoot": "apps/core/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/core/tsconfig.app.json"
+      }
+    },
+    "alert": {
+      "type": "application",
+      "root": "apps/alert",
+      "entryFile": "main",
+      "sourceRoot": "apps/alert/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/alert/tsconfig.app.json"
+      }
+    },
+    "audit_log": {
+      "type": "application",
+      "root": "apps/audit_log",
+      "entryFile": "main",
+      "sourceRoot": "apps/audit_log/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/audit_log/tsconfig.app.json"
+      }
+    },
+    "shared": {
+      "type": "library",
+      "root": "libs/shared",
+      "entryFile": "index",
+      "sourceRoot": "libs/shared/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/shared/tsconfig.lib.json"
+      }
+    },
+    "files": {
+      "type": "application",
+      "root": "apps/files",
+      "entryFile": "main",
+      "sourceRoot": "apps/files/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/files/tsconfig.app.json"
+      }
+    },
+    "accounts": {
+      "type": "application",
+      "root": "apps/accounts",
+      "entryFile": "main",
+      "sourceRoot": "apps/accounts/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/accounts/tsconfig.app.json"
+      }
+    },
+    "products_tm": {
+      "type": "application",
+      "root": "apps/products_tm",
+      "entryFile": "main",
+      "sourceRoot": "apps/products_tm/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/products_tm/tsconfig.app.json"
+      }
+    },
+    "service-connector": {
+      "type": "library",
+      "root": "libs/service-connector",
+      "entryFile": "index",
+      "sourceRoot": "libs/service-connector/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/service-connector/tsconfig.lib.json"
+      }
+    }
+  }
+}

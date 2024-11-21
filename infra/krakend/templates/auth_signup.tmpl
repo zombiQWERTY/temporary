@@ -1,0 +1,98 @@
+{
+  "endpoint": "/api/auth/signup",
+  "method": "POST",
+  "backend": [
+    {
+      "url_pattern": "/auth/signup",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "deny": {{ if eq (.env.name) "PROD" }}["code"]{{else}}[]{{ end }},
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/auth/signup/confirm-phone",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/auth/signup/confirm-phone",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/auth/signin/email?target=client",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/auth/signup/confirm-email",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/signer": {{ include "auth_signer.tmpl" }}
+  },
+  "backend": [
+    {
+      "url_pattern": "/auth/signup/confirm-email",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/auth/signin/email?target=client",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+}

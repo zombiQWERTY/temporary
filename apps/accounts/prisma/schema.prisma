@@ -1,0 +1,139 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "./client"
+  binaryTargets = ["native", "darwin-arm64", "linux-musl-arm64-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("ACCOUNTS_POSTGRES_URL")
+}
+
+model Currency {
+  code      String   @id
+  name      String
+  symbol    String
+  isPrimary Boolean
+  accounts  SubAccount[]
+}
+
+model Rate {
+  id           Int      @id @default(autoincrement())
+  date         DateTime
+  value        Decimal  @db.Decimal(20, 8)
+
+  baseCurrencyCode String   @default("USD")
+  targetCurrencyCode String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Should be created on-time with account creation
+model UserAccountSettings {
+  id Int @id @default(autoincrement())
+  userId Int
+
+  accountOperationsBlocked Boolean @default(false)
+  limitInUsd BigInt @default(2500000) // Cents
+}
+
+model WalletNumber {
+  id        Int     @id @default(autoincrement())
+  walletId  String  @unique
+
+  accountId Int     @unique
+  account   Account @relation(fields: [accountId], references: [id])
+}
+
+model Account {
+  id               Int       @id @default(autoincrement())
+  ownerId          Int
+
+  accountType      AccountTypeEnum
+  extra            Json      @default("{}") // { strategyId: number } // strategyId is linked field to products_tm service's strategy
+
+  subAccounts      SubAccount[]
+
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  walletNumber     WalletNumber?
+}
+
+enum AccountTypeEnum {
+  Master                  // Основной
+  Savings                 // Накопительный
+  TM                      // Trust Management
+}
+
+model SubAccount {
+  id               Int       @id @default(autoincrement())
+
+  currencyCode     String
+  currency         Currency @relation(fields: [currencyCode], references: [code])
+
+  isPrimary        Boolean
+
+  transactions     Transaction[]
+
+  account          Account   @relation(fields: [accountId], references: [id], onUpdate: NoAction, onDelete: NoAction)
+  accountId        Int
+
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+model Transaction {
+  id               Int          @id @default(autoincrement())
+
+  subAccount       SubAccount   @relation(fields: [subAccountId], references: [id], onUpdate: NoAction, onDelete: NoAction)
+  subAccountId     Int
+
+  branchId         Int
+
+  operationType    OperationTypeEnum
+  operationSubType OperationSubTypeEnum
+  operationStatus  OperationStatusEnum
+
+  amount           BigInt       // Cents
+
+  isConfirmed      Boolean   @default(false)
+  confirmationDate DateTime?
+  confirmedBy      Int?
+
+  transferTo       Int?
+  transferFrom     Int?
+
+  pairedTransactionId Int?
+
+  paymentMethodUsed Json
+
+  receiptId        Int?
+  comment          String?
+
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+enum OperationTypeEnum {
+  Deposit                  // Пополнение
+  Withdrawal               // Вывод
+}
+
+enum OperationSubTypeEnum {
+  ExternalDeposit          // Пополнение с внешнего счета
+  ExternalWithdrawal       // Вывод на внешний счет
+  InternalTransfer         // Перевод между своими счетами
+  TransferToStrategy       // Перевод на счет стратегии ДУ (инвестирование)
+  TransferFromStrategy     // Перевод со счета стратегии ДУ (вывод)
+  InternalChange           // Обмен валют между своими счетами
+  ServiceInternalTransfer  // Внутренний перевод для обслуживания (например, комиссии, возвраты)
+  PeerToPeerTransfer       // Перевод на счет другому человеку внутри системы
+}
+
+enum OperationStatusEnum {
+  Pending
+  Completed
+  Failed
+}

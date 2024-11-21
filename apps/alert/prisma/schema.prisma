@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "./client"
+  binaryTargets = ["native", "darwin-arm64", "linux-musl-arm64-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("ALERT_MONGO_URL")
+}
+
+model OtpByEmail {
+  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+  type               OtpTypeEnum
+  otp                String
+
+  userId             Int?
+  email              String
+
+  sentAt             DateTime  @default(now())
+  confirmedAt        DateTime?
+  expiresAt          DateTime
+}
+
+model OtpBySms {
+  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+  type               OtpTypeEnum
+  otp                String
+
+  userId             Int?
+  phone              String
+
+  sentAt             DateTime  @default(now())
+  confirmedAt        DateTime?
+  expiresAt          DateTime
+}
+
+enum OtpTypeEnum {
+  SIGN_UP
+  RESET_PASSWORD
+  RESET_PHONE
+  RESET_EMAIL
+  SIGN_VERIFICATION_DOCUMENTS
+  CONFIRM_TRANSACTION
+}

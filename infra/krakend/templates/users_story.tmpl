@@ -1,0 +1,675 @@
+{
+  "endpoint": "/api/users/profile",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "proxy": {
+      "sequential": true
+    },
+    "auth/validator": {
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/auth/signin/default-meta",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    },
+    {
+      "url_pattern": "/users/profile",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "deny": ["authId"],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/users/profile",
+  "method": "PATCH",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/profile",
+      "method": "PATCH",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "deny": ["authId"],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/users",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "admin",
+        "branchManager",
+        "headOfBranch",
+        "salesManager",
+        "seniorSalesManager",
+        "headOfSales",
+        "complianceManager"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/users/get-users-with-documents",
+  "input_query_strings": [
+    "search",
+    "phone",
+    "skip",
+    "accountStatus",
+    "needDataVerification"
+  ],
+  "method": "GET",
+  "output_encoding": "no-op",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "admin",
+        "complianceManager"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/get-users-with-documents",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/users/user-documents",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/user-documents",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/users/search-users/{role}",
+  "input_query_strings": [
+    "term"
+  ],
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "admin"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/search-users/{role}",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/users/verificate-document/{userId}/{fileId}",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "complianceManager"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/verificate-document/{userId}/{fileId}",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/users/{userId}",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "admin",
+        "branchManager",
+        "headOfBranch",
+        "salesManager",
+        "seniorSalesManager",
+        "headOfSales",
+        "complianceManager",
+        "accountant"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/{userId}",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "deny": ["authId"],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/users/{userId}",
+  "method": "PATCH",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "admin",
+        "headOfBranch",
+        "branchManager",
+        "salesManager",
+        "seniorSalesManager",
+        "headOfSales",
+        "complianceManager",
+        "accountant"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/{userId}",
+      "method": "PATCH",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/users",
+  "input_query_strings": [
+    "skip",
+    "targetRole"
+  ],
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "admin",
+        "headOfBranch",
+        "branchManager",
+        "salesManager",
+        "seniorSalesManager",
+        "headOfSales"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/users/clients",
+  "input_query_strings": [
+    "skip"
+  ],
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "admin",
+        "headOfBranch",
+        "branchManager",
+        "complianceManager",
+        "salesManager",
+        "seniorSalesManager",
+        "headOfSales",
+        "accountant"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/clients",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/users/change-account-status/{userId}",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "admin",
+        "complianceManager",
+        "branchManager",
+        "headOfBranch"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/change-account-status/{userId}",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/users/assign-to-sales-manager/{userId}/{managerId}",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "admin",
+        "headOfSalesManager"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/assign-to-sales-manager/{userId}/{managerId}",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "@comment": "Client uploads files and then we store file ids in user documents with isReviewed flag sets to false",
+  "endpoint": "/api/users/provide-passport-to-verification",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative",
+        "partner",
+        "partnerRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/provide-passport-to-verification",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "@comment": "Client uploads files and then we store file ids in user documents with isReviewed flag sets to false",
+  "endpoint": "/api/users/provide-location-to-verification",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative",
+        "partner",
+        "partnerRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/provide-location-to-verification",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "@comment": "Client uploads files and then we store file ids in user documents with isReviewed flag sets to false",
+  "endpoint": "/api/users/provide-tax-to-verification",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative",
+        "partner",
+        "partnerRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/provide-tax-to-verification",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "@comment": "Client uploads files and then we store file ids in user documents with isReviewed flag sets to false",
+  "endpoint": "/api/users/provide-extra-to-verification",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative",
+        "partner",
+        "partnerRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/provide-extra-to-verification",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "@comment": "Client uploads files through files_story and then uploads json data and fileIds and then we store file ids in user documents with isReviewed flag sets to false",
+  "endpoint": "/api/users/provide-economic-to-verification",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative",
+        "partner",
+        "partnerRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/provide-economic-to-verification",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/users/confirm-verification",
+  "method": "POST",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative",
+        "partner",
+        "partnerRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/confirm-verification",
+      "method": "POST",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+},
+{
+  "endpoint": "/api/users/verification-meta",
+  "method": "GET",
+  {{ include "input_headers.tmpl" }},
+  "extra_config": {
+    "auth/validator": {
+      "roles": [
+        "client",
+        "clientRepresentative",
+        "partner",
+        "partnerRepresentative"
+      ],
+      "audience": ["access"],
+      {{ include "auth_validator.tmpl" }}
+    }
+  },
+  "backend": [
+    {
+      "url_pattern": "/users/verification-meta",
+      "method": "GET",
+      "host": [
+        "{{ env "CORE_SERVICE_HOST" }}"
+      ],
+      "extra_config": {
+        {{ include "modifier_header_id.tmpl" }},
+        "backend/http": {
+          "return_error_details": "core_service"
+        }
+      }
+    }
+  ]
+}

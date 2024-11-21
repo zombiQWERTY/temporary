@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "./client"
+  binaryTargets = ["native", "darwin-arm64", "linux-musl-arm64-openssl-3.0.x", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("AUDIT_LOG_MONGO_URL")
+}
+
+model AuditLog {
+  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+  resource           String?
+  event              Event
+  ipAddress          String?
+  outcome            Outcome
+  state              State?
+  timestamp          DateTime  @default(now())
+  user               User
+  proxyAuth          ProxyAuth?
+  additionalParams   Json?
+}
+
+type Event {
+  eventType          EventType
+  eventDescription   String?
+}
+
+type State {
+  oldState           Json?
+  newState           Json?
+}
+
+type User {
+  id                 Int
+  role               String?
+}
+
+type ProxyAuth {
+  enabled            Boolean? @default(false)
+  user               User
+}
+
+enum Outcome {
+  Success
+  Failure
+  Process
+  Log
+}
+
+enum EventType {
+  Create
+  Update
+  Delete
+  ShadowDelete
+  Apply
+  Decline
+  Income
+  Outgo
+  Transfer
+  Log
+}

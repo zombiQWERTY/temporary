@@ -1,0 +1,16 @@
+"alg": "HS256",
+"operation_debug": true,
+"jwk_local_path": "symmetric_jwk.json",
+"disable_jwk_security": true,
+"roles_key": "roles",
+"propagate_claims": [
+  ["sub", "x-auth-id"],
+  ["roles", "x-auth-role"],
+  ["userId", "x-user-id"],
+  ["mainBranchId", "x-branch-id"],
+
+  ["hostAuthId", "x-auth-host-id"],
+  ["hostRole", "x-auth-host-role"],
+  ["hostUserId", "x-user-host-id"],
+  ["hostBranchId", "x-branch-host-id"]
+]
